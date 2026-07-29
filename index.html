@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assistify | Link in Bio</title>
+    <style>
+        :root {
+            /* Color Palette */
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --btn-bg: #1e293b;
+            --btn-hover: #3b82f6;
+            --accent: #38bdf8;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-color), #020617);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            margin-bottom: 15px;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .bio {
+            font-size: 15px;
+            color: #94a3b8;
+            margin: 8px 0 35px;
+            line-height: 1.5;
+        }
+
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .link-btn {
+            display: block;
+            padding: 16px 20px;
+            background-color: var(--btn-bg);
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .link-btn:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            border-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Add a link to your actual profile image inside the src below -->
+        <img src="https://via.placeholder.com/120" alt="Assistify Profile" class="profile-pic">
+        
+        <h1>Assistify</h1>
+        <p class="bio">Cinematic Visuals & Storytelling</p>
+        
+        <div class="links-container">
+            <!-- Replace the # with your actual URLs -->
+            <a href="#" class="link-btn">🎬 Latest Cinematic Short</a>
+            <a href="#" class="link-btn">📖 "Rain Between Us" Project</a>
+            <a href="#" class="link-btn">💼 Business Inquiries</a>
+            <a href="#" class="link-btn">📸 Follow on Instagram</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -4,100 +4,349 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assistify | Link in Bio</title>
+    
+    <!-- Font Awesome for Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Three.js for Interactive 3D Canvas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         :root {
-            /* Color Palette */
-            --bg-color: #0f172a;
+            --bg-color: #030712;
             --text-color: #f8fafc;
-            --btn-bg: #1e293b;
-            --btn-hover: #3b82f6;
-            --accent: #38bdf8;
+            --glass-bg: rgba(15, 23, 42, 0.55);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --accent-glow: rgba(56, 189, 248, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
-            padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--bg-color), #020617);
+            background-color: var(--bg-color);
             color: var(--text-color);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            min-height: 100vh;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
         }
 
+        /* 3D Canvas Layer */
+        #webgl-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Content Container with Glassmorphism Overlay */
         .container {
-            width: 100%;
-            max-width: 450px;
-            padding: 50px 20px;
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 440px;
+            margin: 40px auto;
+            padding: 40px 24px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--accent-glow);
             text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .profile-pic {
-            width: 120px;
-            height: 120px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid var(--accent);
-            margin-bottom: 15px;
-            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            margin-bottom: 16px;
+            box-shadow: 0 0 25px var(--accent-glow);
+            transition: transform 0.4s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.05) rotate(3deg);
         }
 
         h1 {
-            margin: 0;
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 28px;
+            font-weight: 800;
             letter-spacing: 0.5px;
+            background: linear-gradient(135deg, #fff 0%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .bio {
-            font-size: 15px;
+            font-size: 14px;
             color: #94a3b8;
-            margin: 8px 0 35px;
+            margin: 8px 0 24px;
             line-height: 1.5;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .social-icon {
+            color: #cbd5e1;
+            font-size: 22px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .social-icon:hover {
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+            transform: translateY(-4px);
+            box-shadow: 0 5px 15px var(--accent-glow);
         }
 
         .links-container {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 14px;
+            margin-bottom: 28px;
         }
 
         .link-btn {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             padding: 16px 20px;
-            background-color: var(--btn-bg);
+            background: rgba(255, 255, 255, 0.04);
             color: var(--text-color);
             text-decoration: none;
             border-radius: 14px;
             font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
         }
 
         .link-btn:hover {
-            background-color: var(--btn-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
-            border-color: transparent;
+            background: rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+        }
+
+        .contact-section {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            text-align: left;
+        }
+
+        .contact-section h2 {
+            font-size: 16px;
+            margin-bottom: 12px;
+            text-align: center;
+            color: #e2e8f0;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: #f8fafc;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #38bdf8, #3b82f6);
+            color: #020617;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
         }
     </style>
 </head>
 <body>
+
+    <!-- 3D Canvas Background -->
+    <canvas id="webgl-bg"></canvas>
+
+    <!-- Interactive Card -->
     <div class="container">
-        <!-- Add a link to your actual profile image inside the src below -->
-        <img src="https://via.placeholder.com/120" alt="Assistify Profile" class="profile-pic">
+        <img src="https://via.placeholder.com/110" alt="Assistify Profile" class="profile-pic">
         
         <h1>Assistify</h1>
         <p class="bio">Cinematic Visuals & Storytelling</p>
         
+        <div class="social-icons">
+            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-icon" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        </div>
+
         <div class="links-container">
-            <!-- Replace the # with your actual URLs -->
             <a href="#" class="link-btn">🎬 Latest Cinematic Short</a>
             <a href="#" class="link-btn">📖 "Rain Between Us" Project</a>
-            <a href="#" class="link-btn">💼 Business Inquiries</a>
-            <a href="#" class="link-btn">📸 Follow on Instagram</a>
+        </div>
+
+        <div class="contact-section">
+            <h2>Get in Touch</h2>
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea name="message" class="form-control" placeholder="Discuss a collaboration or inquiry..." required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
         </div>
     </div>
+
+    <!-- 3D Animation Script -->
+    <script>
+        const canvas = document.getElementById('webgl-bg');
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+        // Create 3D Wireframe Plane / Torus
+        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
+        const material = new THREE.MeshBasicMaterial({ 
+            color: 0x38bdf8, 
+            wireframe: true,
+            transparent: true,
+            opacity: 0.15 
+        });
+        const torusKnot = new THREE.Mesh(geometry, material);
+        scene.add(torusKnot);
+
+        // Add Floating Particle Field
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 300;
+        const posArray = new Float32Array(particlesCount * 3);
+
+        for(let i=0; i<particlesCount*3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 50;
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.08,
+            color: 0x3b82f6,
+            transparent: true,
+            opacity: 0.6
+        });
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        camera.position.z = 25;
+
+        // Mouse Parallax Interaction
+        let mouseX = 0;
+        let mouseY = 0;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) - 0.5;
+            mouseY = (event.clientY / window.innerHeight) - 0.5;
+        });
+
+        // Animation Loop
+        let clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const elapsedTime = clock.getElapsedTime();
+
+            // Continuous rotation
+            torusKnot.rotation.x = elapsedTime * 0.15;
+            torusKnot.rotation.y = elapsedTime * 0.2;
+
+            particlesMesh.rotation.y = -elapsedTime * 0.05;
+
+            // Reactive Mouse Movement
+            torusKnot.rotation.x += mouseY * 0.05;
+            torusKnot.rotation.y += mouseX * 0.05;
+
+            // Color shift over time
+            let hue = (elapsedTime * 10) % 360;
+            material.color.setHSL(hue / 360, 0.7, 0.5);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Responsive Resizing
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 </html>

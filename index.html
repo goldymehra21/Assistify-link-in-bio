@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistify | Cosmic-Mech Bio</title>
+    <title>Assistify | Modern Light Bio</title>
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,14 +12,15 @@
 
     <style>
         :root {
-            --bg-deep: #05020a;
-            --text-main: #f8fafc;
-            --accent-orange: #ff6b00;
-            --accent-cyan: #00f2fe;
-            --accent-violet: #8b5cf6;
-            --glass-card: rgba(15, 10, 28, 0.7);
-            --glass-border: rgba(255, 107, 0, 0.25);
-            --metal-gradient: linear-gradient(135deg, #2a2438, #130f1e);
+            --bg-light: #f1f5f9;
+            --text-dark: #0f172a;
+            --text-muted: #64748b;
+            --accent-blue: #2563eb;
+            --accent-purple: #7c3aed;
+            --accent-cyan: #0284c7;
+            --card-glass: rgba(255, 255, 255, 0.7);
+            --card-border: rgba(255, 255, 255, 0.9);
+            --shadow-soft: 0 20px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
         * {
@@ -30,8 +31,8 @@
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-deep);
-            color: var(--text-main);
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -51,53 +52,61 @@
             pointer-events: none;
         }
 
-        /* Main Glassmorphic Cyber-Card */
-        .cyber-card {
+        /* Light Glassmorphic Container */
+        .glass-card {
             position: relative;
             z-index: 1;
             width: 90%;
-            max-width: 450px;
+            max-width: 440px;
             margin: 40px auto;
             padding: 40px 24px;
-            background: var(--glass-card);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            box-shadow: 
-                0 0 40px rgba(255, 107, 0, 0.15),
-                0 0 80px rgba(0, 242, 254, 0.1),
-                inset 0 0 20px rgba(255, 255, 255, 0.03);
+            background: var(--card-glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--card-border);
+            border-radius: 28px;
+            box-shadow: var(--shadow-soft);
             text-align: center;
-            animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            from { opacity: 0; transform: translateY(20px) scale(0.98); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Mech Avatar with Glowing Ring */
-        .avatar-wrapper {
+        /* Animated Rotating Yin-Yang Logo */
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .yinyang-box {
+            width: 64px;
+            height: 64px;
             position: relative;
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 20px;
+            animation: rotateYinYang 12s linear infinite;
+            filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.25));
         }
 
-        .avatar-ring {
-            position: absolute;
-            top: -6px;
-            left: -6px;
-            width: 132px;
-            height: 132px;
-            border-radius: 50%;
-            border: 2px dashed var(--accent-orange);
-            animation: spinRing 20s linear infinite;
+        @keyframes rotateYinYang {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        @keyframes spinRing {
-            100% { transform: rotate(360deg); }
+        .yinyang-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Profile Avatar */
+        .avatar-container {
+            position: relative;
+            width: 110px;
+            height: 110px;
+            margin: 10px auto 20px;
         }
 
         .profile-pic {
@@ -105,155 +114,122 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
-        }
-
-        /* Logo & Brand Typography */
-        .brand-header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 6px;
-        }
-
-        .robot-icon {
-            font-size: 24px;
-            color: var(--accent-orange);
-            filter: drop-shadow(0 0 8px var(--accent-orange));
+            border: 3px solid #ffffff;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             font-size: 28px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            background: linear-gradient(135deg, #ffffff 0%, var(--accent-orange) 50%, var(--accent-cyan) 100%);
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
+            margin-bottom: 4px;
         }
 
         .subtitle {
             font-size: 13px;
+            font-weight: 700;
             color: var(--accent-cyan);
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-            font-weight: 600;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
         }
 
         .bio {
             font-size: 14px;
-            color: #a7abb9;
+            color: var(--text-muted);
             margin-bottom: 24px;
             line-height: 1.5;
         }
 
-        /* Social Icons */
+        /* Social Grid */
         .social-grid {
             display: flex;
             justify-content: center;
-            gap: 16px;
-            margin-bottom: 30px;
+            gap: 14px;
+            margin-bottom: 28px;
         }
 
         .social-link {
-            width: 46px;
-            height: 46px;
-            border-radius: 12px;
-            background: var(--metal-gradient);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             text-decoration: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
         }
 
         .social-link:hover {
-            color: var(--accent-orange);
-            border-color: var(--accent-orange);
-            transform: translateY(-4px);
-            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.35);
+            color: var(--accent-blue);
+            background: #ffffff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+            border-color: var(--accent-blue);
         }
 
         /* Link Buttons */
         .links-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 14px;
-            margin-bottom: 30px;
+            gap: 12px;
+            margin-bottom: 28px;
         }
 
-        .mecha-btn {
-            position: relative;
+        .link-card {
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 16px 20px;
-            background: var(--metal-gradient);
-            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.85);
+            color: var(--text-dark);
             text-decoration: none;
-            border-radius: 12px;
-            font-weight: 700;
+            border-radius: 16px;
+            font-weight: 600;
             font-size: 15px;
-            border: 1px solid rgba(255, 107, 0, 0.2);
+            border: 1px solid rgba(226, 232, 240, 0.9);
             transition: all 0.3s ease;
-            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
-        .mecha-btn::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 4px;
-            height: 100%;
-            background: var(--accent-cyan);
-            transition: width 0.3s ease;
+        .link-card:hover {
+            background: #ffffff;
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.12);
         }
 
-        .mecha-btn:hover {
-            border-color: var(--accent-cyan);
-            transform: translateX(4px) translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.25);
+        .badge {
+            font-size: 11px;
+            padding: 4px 10px;
+            background: rgba(37, 99, 235, 0.08);
+            color: var(--accent-blue);
+            border-radius: 20px;
+            font-weight: 700;
         }
 
-        .mecha-btn:hover::before {
-            width: 100%;
-            opacity: 0.1;
-        }
-
-        .btn-tag {
-            font-size: 10px;
-            padding: 4px 8px;
-            background: rgba(255, 107, 0, 0.2);
-            border: 1px solid var(--accent-orange);
-            color: var(--accent-orange);
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Contact Form Section */
+        /* Contact Form */
         .contact-box {
-            background: rgba(10, 6, 20, 0.6);
-            padding: 22px 18px;
-            border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: 18px;
+            border: 1px solid rgba(226, 232, 240, 0.8);
             text-align: left;
         }
 
         .contact-title {
-            font-size: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 14px;
-            color: var(--accent-orange);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -262,19 +238,19 @@
         .input-field {
             width: 100%;
             padding: 12px 14px;
-            background: rgba(20, 15, 35, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #fff;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            color: var(--text-dark);
             font-size: 13px;
-            margin-bottom: 12px;
-            transition: border-color 0.3s ease;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
         }
 
         .input-field:focus {
             outline: none;
-            border-color: var(--accent-cyan);
-            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
         }
 
         textarea.input-field {
@@ -284,48 +260,64 @@
 
         .submit-btn {
             width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--accent-orange), #e65100);
+            padding: 12px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
             color: #ffffff;
             border: none;
-            border-radius: 8px;
-            font-weight: 800;
+            border-radius: 10px;
+            font-weight: 700;
             font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
         }
 
         .submit-btn:hover {
-            background: linear-gradient(135deg, #ff7b1a, var(--accent-orange));
-            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
-            transform: translateY(-2px);
+            opacity: 0.95;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
     </style>
 </head>
 <body>
 
-    <!-- 3D WebGL Canvas Layer -->
+    <!-- Light 3D Canvas Background -->
     <canvas id="webgl-canvas"></canvas>
 
-    <!-- Main Content Card -->
-    <div class="cyber-card">
+    <!-- Main Glass Card -->
+    <div class="glass-card">
         
-        <!-- Profile Pic with Spinning Ring -->
-        <div class="avatar-wrapper">
-            <div class="avatar-ring"></div>
-            <img src="https://via.placeholder.com/120" alt="Assistify Profile" class="profile-pic">
+        <!-- Rotating Yin-Yang Logo in Circle -->
+        <div class="logo-wrapper">
+            <div class="yinyang-box">
+                <svg class="yinyang-svg" viewBox="0 0 100 100">
+                    <!-- Outer Ring Gradient -->
+                    <defs>
+                        <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#2563eb" />
+                            <stop offset="100%" stop-color="#7c3aed" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Yin Yang Body -->
+                    <circle cx="50" cy="50" r="46" fill="#0f172a" />
+                    <path d="M 50,4 A 46,46 0 0,1 50,96 A 23,23 0 0,1 50,50 A 23,23 0 0,0 50,4 Z" fill="#ffffff"/>
+                    <circle cx="50" cy="27" r="7" fill="#0f172a"/>
+                    <circle cx="50" cy="73" r="7" fill="#ffffff"/>
+                    <!-- Outer Accent Ring -->
+                    <circle cx="50" cy="50" r="47" fill="none" stroke="url(#ring-grad)" stroke-width="3"/>
+                </svg>
+            </div>
+        </div>
+
+        <h1>Assistify</h1>
+        <div class="subtitle">Cosmics & Mecha Storytelling</div>
+
+        <!-- Avatar Picture -->
+        <div class="avatar-container">
+            <img src="https://via.placeholder.com/110" alt="Assistify Profile" class="profile-pic">
         </div>
         
-        <!-- Header & Logo -->
-        <div class="brand-header">
-            <i class="fa-solid fa-robot robot-icon"></i>
-            <h1>ASSISTIFY</h1>
-        </div>
-        <div class="subtitle">Astro-Mech Visuals</div>
-        <p class="bio">Exploring Cosmic Universes & AI Storytelling</p>
+        <p class="bio">Creating balance between futuristic robot tech and cinematic universe narratives.</p>
         
         <!-- Social Icons -->
         <div class="social-grid">
@@ -335,38 +327,38 @@
             <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
 
-        <!-- Links Section -->
+        <!-- Links -->
         <div class="links-wrapper">
-            <a href="#" class="mecha-btn">
+            <a href="#" class="link-card">
                 <span>🎬 Latest Cinematic Short</span>
-                <span class="btn-tag">Watch</span>
+                <span class="badge">Watch</span>
             </a>
-            <a href="#" class="mecha-btn">
+            <a href="#" class="link-card">
                 <span>📖 "Rain Between Us" Project</span>
-                <span class="btn-tag">Story</span>
+                <span class="badge">Story</span>
             </a>
-            <a href="#" class="mecha-btn">
+            <a href="#" class="link-card">
                 <span>🤖 AI Sci-Fi Portfolio</span>
-                <span class="btn-tag">Gallery</span>
+                <span class="badge">Gallery</span>
             </a>
         </div>
 
         <!-- Contact Form -->
         <div class="contact-box">
             <div class="contact-title">
-                <i class="fa-solid fa-satellite-dish"></i> Direct Transmission
+                <i class="fa-regular fa-paper-plane"></i> Send a Message
             </div>
             <!-- Replace "YOUR_FORM_ID" with your actual Formspree ID -->
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="text" name="name" class="input-field" placeholder="Commander / Name" required>
-                <input type="email" name="email" class="input-field" placeholder="Sub-space Email" required>
-                <textarea name="message" class="input-field" placeholder="State your mission objective or inquiry..." required></textarea>
-                <button type="submit" class="submit-btn">Send Signal</button>
+                <input type="text" name="name" class="input-field" placeholder="Your Name" required>
+                <input type="email" name="email" class="input-field" placeholder="Your Email" required>
+                <textarea name="message" class="input-field" placeholder="State your inquiry or collaboration idea..." required></textarea>
+                <button type="submit" class="submit-btn">Send Message</button>
             </form>
         </div>
     </div>
 
-    <!-- 3D Animated Engine Script -->
+    <!-- 3D Light Background Script -->
     <script>
         const canvas = document.getElementById('webgl-canvas');
         const scene = new THREE.Scene();
@@ -376,73 +368,45 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // 1. Cosmic Starfield Particles (Universe Element)
-        const starCount = 600;
-        const starGeo = new THREE.BufferGeometry();
-        const starPositions = new Float32Array(starCount * 3);
-        const starColors = new Float32Array(starCount * 3);
+        // Light Theme Floating Elements
+        const group = new THREE.Group();
 
-        const colorPalette = [
-            new THREE.Color(0xff6b00), // Electric Orange
-            new THREE.Color(0x00f2fe), // Cyan
-            new THREE.Color(0x8b5cf6), // Violet
-            new THREE.Color(0xffffff)  // Bright Star White
-        ];
+        // 1. Soft Blue Wireframe Ring
+        const ring1Geo = new THREE.TorusGeometry(8, 0.12, 16, 100);
+        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.25 });
+        const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+        group.add(ring1);
 
-        for(let i = 0; i < starCount * 3; i += 3) {
-            starPositions[i] = (Math.random() - 0.5) * 60;
-            starPositions[i+1] = (Math.random() - 0.5) * 60;
-            starPositions[i+2] = (Math.random() - 0.5) * 60;
+        // 2. Soft Purple Gyro Ring
+        const ring2Geo = new THREE.TorusGeometry(11, 0.08, 16, 100);
+        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x7c3aed, wireframe: true, transparent: true, opacity: 0.2 });
+        const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+        ring2.rotation.x = Math.PI / 4;
+        group.add(ring2);
 
-            const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
-            starColors[i] = randomColor.r;
-            starColors[i+1] = randomColor.g;
-            starColors[i+2] = randomColor.b;
+        // 3. Floating Celestial Dots
+        const dotsCount = 200;
+        const dotsGeo = new THREE.BufferGeometry();
+        const dotsPos = new Float32Array(dotsCount * 3);
+
+        for(let i = 0; i < dotsCount * 3; i++) {
+            dotsPos[i] = (Math.random() - 0.5) * 50;
         }
 
-        starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
-        starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
-
-        const starMat = new THREE.PointsMaterial({
-            size: 0.12,
-            vertexColors: true,
+        dotsGeo.setAttribute('position', new THREE.BufferAttribute(dotsPos, 3));
+        const dotsMat = new THREE.PointsMaterial({
+            size: 0.15,
+            color: 0x0284c7,
             transparent: true,
-            opacity: 0.8
+            opacity: 0.4
         });
+        const dotsMesh = new THREE.Points(dotsGeo, dotsMat);
+        scene.add(dotsMesh);
 
-        const starField = new THREE.Points(starGeo, starMat);
-        scene.add(starField);
+        scene.add(group);
+        camera.position.z = 20;
 
-        // 2. Mecha Gyro Reactor Core (Robot/Mecha Element)
-        const mechaGroup = new THREE.Group();
-
-        // Inner Core (Glowing Octahedron)
-        const coreGeo = new THREE.OctahedronGeometry(3, 0);
-        const coreMat = new THREE.MeshBasicMaterial({ 
-            color: 0xff6b00, 
-            wireframe: true 
-        });
-        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-        mechaGroup.add(coreMesh);
-
-        // Outer Ring 1 (Torus)
-        const ring1Geo = new THREE.TorusGeometry(6, 0.1, 16, 100);
-        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x00f2fe, wireframe: true });
-        const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
-        mechaGroup.add(ring1);
-
-        // Outer Ring 2 (Offset Gyro Ring)
-        const ring2Geo = new THREE.TorusGeometry(8, 0.08, 16, 100);
-        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true });
-        const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-        ring2.rotation.x = Math.PI / 3;
-        mechaGroup.add(ring2);
-
-        scene.add(mechaGroup);
-
-        camera.position.z = 18;
-
-        // Interactive Parallax Tracking
+        // Mouse Parallax Interaction
         let mouseX = 0;
         let mouseY = 0;
 
@@ -451,36 +415,29 @@
             mouseY = (e.clientY / window.innerHeight) - 0.5;
         });
 
-        // Animation Loop
         const clock = new THREE.Clock();
 
         function animate() {
             requestAnimationFrame(animate);
             const time = clock.getElapsedTime();
 
-            // Rotate Starfield
-            starField.rotation.y = time * 0.02;
+            ring1.rotation.y = time * 0.2;
+            ring1.rotation.x = time * 0.1;
 
-            // Gyro Core Rotations
-            coreMesh.rotation.x = time * 0.4;
-            coreMesh.rotation.y = time * 0.6;
+            ring2.rotation.y = -time * 0.15;
+            ring2.rotation.z = time * 0.1;
 
-            ring1.rotation.y = time * 0.5;
-            ring1.rotation.z = time * 0.2;
+            dotsMesh.rotation.y = time * 0.03;
 
-            ring2.rotation.x = -time * 0.3;
-            ring2.rotation.y = time * 0.4;
-
-            // Smooth Mouse Parallax
-            mechaGroup.rotation.y += (mouseX * 0.5 - mechaGroup.rotation.y) * 0.05;
-            mechaGroup.rotation.x += (mouseY * 0.5 - mechaGroup.rotation.x) * 0.05;
+            // Smooth reaction to cursor
+            group.rotation.y += (mouseX * 0.4 - group.rotation.y) * 0.05;
+            group.rotation.x += (mouseY * 0.4 - group.rotation.x) * 0.05;
 
             renderer.render(scene, camera);
         }
 
         animate();
 
-        // Screen Resize Listener
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();

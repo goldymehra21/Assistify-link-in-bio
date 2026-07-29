@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistify | Modern Light Bio</title>
+    <title>Assistify | Cosmic-Mech Red-Blue Void</title>
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,15 +12,15 @@
 
     <style>
         :root {
-            --bg-light: #f1f5f9;
-            --text-dark: #0f172a;
-            --text-muted: #64748b;
-            --accent-blue: #2563eb;
-            --accent-purple: #7c3aed;
-            --accent-cyan: #0284c7;
-            --card-glass: rgba(255, 255, 255, 0.7);
-            --card-border: rgba(255, 255, 255, 0.9);
-            --shadow-soft: 0 20px 40px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
+            --bg-deep: #030108;
+            --text-main: #f8fafc;
+            --accent-red: #ff0055;
+            --accent-blue: #00d2ff;
+            --accent-deep-blue: #0044ff;
+            --glass-card: rgba(8, 4, 18, 0.78);
+            --glass-border: rgba(255, 0, 85, 0.35);
+            --metal-gradient: linear-gradient(135deg, rgba(22, 12, 38, 0.85), rgba(7, 3, 15, 0.95));
+            --dual-gradient: linear-gradient(135deg, var(--accent-red), var(--accent-deep-blue));
         }
 
         * {
@@ -31,8 +31,8 @@
 
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -52,61 +52,89 @@
             pointer-events: none;
         }
 
-        /* Light Glassmorphic Container */
-        .glass-card {
+        /* Cyber HUD Card Frame */
+        .cyber-card {
             position: relative;
             z-index: 1;
             width: 90%;
-            max-width: 440px;
+            max-width: 460px;
             margin: 40px auto;
-            padding: 40px 24px;
-            background: var(--card-glass);
+            padding: 42px 26px;
+            background: var(--glass-card);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--card-border);
-            border-radius: 28px;
-            box-shadow: var(--shadow-soft);
+            border: 1px solid rgba(255, 0, 85, 0.25);
+            border-radius: 24px;
+            box-shadow: 
+                0 0 50px rgba(255, 0, 85, 0.2),
+                0 0 90px rgba(0, 210, 255, 0.15),
+                inset 0 0 30px rgba(255, 255, 255, 0.02);
             text-align: center;
-            animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Sci-Fi HUD Corner Brackets */
+        .cyber-card::before, .cyber-card::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            pointer-events: none;
+        }
+        .cyber-card::before {
+            top: 12px; left: 12px;
+            border-top: 2px solid var(--accent-red);
+            border-left: 2px solid var(--accent-red);
+        }
+        .cyber-card::after {
+            bottom: 12px; right: 12px;
+            border-bottom: 2px solid var(--accent-blue);
+            border-right: 2px solid var(--accent-blue);
         }
 
         @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(20px) scale(0.98); }
+            from { opacity: 0; transform: translateY(40px) scale(0.92); }
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Animated Rotating Yin-Yang Logo */
-        .logo-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .yinyang-box {
-            width: 64px;
-            height: 64px;
+        /* Mech Avatar with Dual Red/Blue Energy Orbit */
+        .avatar-wrapper {
             position: relative;
-            animation: rotateYinYang 12s linear infinite;
-            filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.25));
+            width: 128px;
+            height: 128px;
+            margin: 0 auto 22px;
         }
 
-        @keyframes rotateYinYang {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+        .avatar-ring-red {
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            width: 144px;
+            height: 144px;
+            border-radius: 50%;
+            border: 2px dashed var(--accent-red);
+            animation: spinClockwise 16s linear infinite;
+            box-shadow: 0 0 15px rgba(255, 0, 85, 0.3);
         }
 
-        .yinyang-svg {
-            width: 100%;
-            height: 100%;
+        .avatar-ring-blue {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 136px;
+            height: 136px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: var(--accent-blue);
+            border-bottom-color: var(--accent-deep-blue);
+            animation: spinCounter 10s linear infinite;
         }
 
-        /* Profile Avatar */
-        .avatar-container {
-            position: relative;
-            width: 110px;
-            height: 110px;
-            margin: 10px auto 20px;
+        @keyframes spinClockwise {
+            100% { transform: rotate(360deg); }
+        }
+        @keyframes spinCounter {
+            100% { transform: rotate(-360deg); }
         }
 
         .profile-pic {
@@ -114,143 +142,189 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #ffffff;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            border: 2px solid var(--accent-blue);
+            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
+        }
+
+        /* Header & Neon Branding */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .robot-icon {
+            font-size: 26px;
+            background: var(--dual-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 10px var(--accent-red));
         }
 
         h1 {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-red) 50%, var(--accent-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 4px;
+            text-transform: uppercase;
         }
 
         .subtitle {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--accent-cyan);
+            font-size: 12px;
+            color: var(--accent-blue);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 10px;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 0 0 8px rgba(0, 210, 255, 0.5);
         }
 
         .bio {
             font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 24px;
+            color: #94a3b8;
+            margin-bottom: 26px;
             line-height: 1.5;
         }
 
-        /* Social Grid */
+        /* Social Icons */
         .social-grid {
             display: flex;
             justify-content: center;
-            gap: 14px;
-            margin-bottom: 28px;
+            gap: 16px;
+            margin-bottom: 30px;
         }
 
         .social-link {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: #ffffff;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            color: var(--text-dark);
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--metal-gradient);
+            border: 1px solid rgba(255, 0, 85, 0.2);
+            color: var(--text-main);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
+            font-size: 20px;
             text-decoration: none;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
         }
 
         .social-link:hover {
-            color: var(--accent-blue);
-            background: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.2);
+            color: #ffffff;
             border-color: var(--accent-blue);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 5px 25px rgba(0, 210, 255, 0.45);
+            background: linear-gradient(135deg, rgba(255, 0, 85, 0.4), rgba(0, 68, 255, 0.4));
         }
 
         /* Link Buttons */
         .links-wrapper {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-bottom: 28px;
+            gap: 14px;
+            margin-bottom: 32px;
         }
 
-        .link-card {
+        .mecha-btn {
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.85);
-            color: var(--text-dark);
+            background: var(--metal-gradient);
+            color: var(--text-main);
             text-decoration: none;
-            border-radius: 16px;
-            font-weight: 600;
-            font-size: 15px;
-            border: 1px solid rgba(226, 232, 240, 0.9);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-        }
-
-        .link-card:hover {
-            background: #ffffff;
-            border-color: var(--accent-blue);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.12);
-        }
-
-        .badge {
-            font-size: 11px;
-            padding: 4px 10px;
-            background: rgba(37, 99, 235, 0.08);
-            color: var(--accent-blue);
-            border-radius: 20px;
+            border-radius: 14px;
             font-weight: 700;
+            font-size: 15px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            transition: all 0.3s ease;
+            overflow: hidden;
         }
 
-        /* Contact Form */
+        .mecha-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-red);
+            transition: all 0.3s ease;
+        }
+
+        .mecha-btn:hover {
+            border-color: var(--accent-red);
+            transform: translateX(4px) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(255, 0, 85, 0.3);
+        }
+
+        .mecha-btn:hover::before {
+            width: 100%;
+            background: var(--dual-gradient);
+            opacity: 0.15;
+        }
+
+        .btn-tag {
+            font-size: 10px;
+            padding: 4px 8px;
+            background: rgba(255, 0, 85, 0.15);
+            border: 1px solid var(--accent-red);
+            color: #ff6699;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .mecha-btn:hover .btn-tag {
+            background: rgba(0, 210, 255, 0.2);
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        /* Direct Transmission Contact Section */
         .contact-box {
-            background: rgba(255, 255, 255, 0.6);
-            padding: 20px;
-            border-radius: 18px;
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            background: rgba(6, 3, 16, 0.8);
+            padding: 22px 18px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 0, 85, 0.2);
             text-align: left;
+            position: relative;
         }
 
         .contact-title {
             font-size: 14px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 14px;
+            color: var(--accent-red);
             display: flex;
             align-items: center;
             gap: 8px;
+            font-weight: 800;
         }
 
         .input-field {
             width: 100%;
             padding: 12px 14px;
-            background: #ffffff;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            color: var(--text-dark);
+            background: rgba(14, 8, 28, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
             font-size: 13px;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             transition: all 0.3s ease;
         }
 
         .input-field:focus {
             outline: none;
             border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+            box-shadow: 0 0 12px rgba(0, 210, 255, 0.3);
         }
 
         textarea.input-field {
@@ -260,66 +334,51 @@
 
         .submit-btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            padding: 14px;
+            background: var(--dual-gradient);
             color: #ffffff;
             border: none;
             border-radius: 10px;
-            font-weight: 700;
+            font-weight: 800;
             font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 0, 85, 0.35);
         }
 
         .submit-btn:hover {
-            opacity: 0.95;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 6px 25px rgba(0, 210, 255, 0.5);
+            transform: translateY(-2px);
+            filter: brightness(1.15);
         }
     </style>
 </head>
 <body>
 
-    <!-- Light 3D Canvas Background -->
+    <!-- 3D WebGL Canvas Layer -->
     <canvas id="webgl-canvas"></canvas>
 
-    <!-- Main Glass Card -->
-    <div class="glass-card">
+    <!-- Main Content Card -->
+    <div class="cyber-card">
         
-        <!-- Rotating Yin-Yang Logo in Circle -->
-        <div class="logo-wrapper">
-            <div class="yinyang-box">
-                <svg class="yinyang-svg" viewBox="0 0 100 100">
-                    <!-- Outer Ring Gradient -->
-                    <defs>
-                        <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#2563eb" />
-                            <stop offset="100%" stop-color="#7c3aed" />
-                        </linearGradient>
-                    </defs>
-                    <!-- Yin Yang Body -->
-                    <circle cx="50" cy="50" r="46" fill="#0f172a" />
-                    <path d="M 50,4 A 46,46 0 0,1 50,96 A 23,23 0 0,1 50,50 A 23,23 0 0,0 50,4 Z" fill="#ffffff"/>
-                    <circle cx="50" cy="27" r="7" fill="#0f172a"/>
-                    <circle cx="50" cy="73" r="7" fill="#ffffff"/>
-                    <!-- Outer Accent Ring -->
-                    <circle cx="50" cy="50" r="47" fill="none" stroke="url(#ring-grad)" stroke-width="3"/>
-                </svg>
-            </div>
-        </div>
-
-        <h1>Assistify</h1>
-        <div class="subtitle">Cosmics & Mecha Storytelling</div>
-
-        <!-- Avatar Picture -->
-        <div class="avatar-container">
-            <img src="https://via.placeholder.com/110" alt="Assistify Profile" class="profile-pic">
+        <!-- Profile Pic with Dual Red & Blue Rings -->
+        <div class="avatar-wrapper">
+            <div class="avatar-ring-red"></div>
+            <div class="avatar-ring-blue"></div>
+            <img src="https://via.placeholder.com/128" alt="Assistify Profile" class="profile-pic">
         </div>
         
-        <p class="bio">Creating balance between futuristic robot tech and cinematic universe narratives.</p>
+        <!-- Header & Branding -->
+        <div class="brand-header">
+            <i class="fa-solid fa-robot robot-icon"></i>
+            <h1>ASSISTIFY</h1>
+        </div>
+        <div class="subtitle">Red-Blue Cosmic Void</div>
+        <p class="bio">Exploring Multiverse Storytelling, Sci-Fi Visuals & Mecha Universes</p>
         
-        <!-- Social Icons -->
+        <!-- Social Links -->
         <div class="social-grid">
             <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
@@ -327,38 +386,37 @@
             <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
 
-        <!-- Links -->
+        <!-- Links Section -->
         <div class="links-wrapper">
-            <a href="#" class="link-card">
-                <span>🎬 Latest Cinematic Short</span>
-                <span class="badge">Watch</span>
+            <a href="#" class="mecha-btn">
+                <span>🎬 Latest Sci-Fi Cinematic</span>
+                <span class="btn-tag">Watch</span>
             </a>
-            <a href="#" class="link-card">
-                <span>📖 "Rain Between Us" Project</span>
-                <span class="badge">Story</span>
+            <a href="#" class="mecha-btn">
+                <span>📖 "Rain Between Us" Story</span>
+                <span class="btn-tag">Read</span>
             </a>
-            <a href="#" class="link-card">
-                <span>🤖 AI Sci-Fi Portfolio</span>
-                <span class="badge">Gallery</span>
+            <a href="#" class="mecha-btn">
+                <span>🤖 Deep Space Gallery</span>
+                <span class="btn-tag">Explore</span>
             </a>
         </div>
 
-        <!-- Contact Form -->
+        <!-- Contact Transmission -->
         <div class="contact-box">
             <div class="contact-title">
-                <i class="fa-regular fa-paper-plane"></i> Send a Message
+                <i class="fa-solid fa-satellite-dish"></i> Cosmic Transmission
             </div>
-            <!-- Replace "YOUR_FORM_ID" with your actual Formspree ID -->
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <input type="text" name="name" class="input-field" placeholder="Your Name" required>
-                <input type="email" name="email" class="input-field" placeholder="Your Email" required>
-                <textarea name="message" class="input-field" placeholder="State your inquiry or collaboration idea..." required></textarea>
-                <button type="submit" class="submit-btn">Send Message</button>
+                <input type="text" name="name" class="input-field" placeholder="Commander / Name" required>
+                <input type="email" name="email" class="input-field" placeholder="Sub-space Email" required>
+                <textarea name="message" class="input-field" placeholder="Transmit inquiry or mission brief..." required></textarea>
+                <button type="submit" class="submit-btn">Send Signal</button>
             </form>
         </div>
     </div>
 
-    <!-- 3D Light Background Script -->
+    <!-- 3D Multiverse & Mech Engine Script -->
     <script>
         const canvas = document.getElementById('webgl-canvas');
         const scene = new THREE.Scene();
@@ -368,45 +426,110 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Light Theme Floating Elements
-        const group = new THREE.Group();
+        // -------------------------------------------------------------
+        // 1. Cosmic Spiral Galaxy (Red & Blue Universe)
+        // -------------------------------------------------------------
+        const galaxyParticleCount = 2500;
+        const galaxyGeo = new THREE.BufferGeometry();
+        const galaxyPositions = new Float32Array(galaxyParticleCount * 3);
+        const galaxyColors = new Float32Array(galaxyParticleCount * 3);
 
-        // 1. Soft Blue Wireframe Ring
-        const ring1Geo = new THREE.TorusGeometry(8, 0.12, 16, 100);
-        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.25 });
-        const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
-        group.add(ring1);
+        const colorRed = new THREE.Color(0xff0055);
+        const colorBlue = new THREE.Color(0x00d2ff);
+        const colorDeepBlue = new THREE.Color(0x0022ff);
+        const colorPurple = new THREE.Color(0x8800ff);
 
-        // 2. Soft Purple Gyro Ring
-        const ring2Geo = new THREE.TorusGeometry(11, 0.08, 16, 100);
-        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x7c3aed, wireframe: true, transparent: true, opacity: 0.2 });
-        const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-        ring2.rotation.x = Math.PI / 4;
-        group.add(ring2);
+        for (let i = 0; i < galaxyParticleCount; i++) {
+            const i3 = i * 3;
+            // Spiral arms equation
+            const radius = Math.random() * 30 + 2;
+            const spinAngle = radius * 0.4;
+            const branchAngle = ((i % 2) * Math.PI); // 2 Spiral Arms
 
-        // 3. Floating Celestial Dots
-        const dotsCount = 200;
-        const dotsGeo = new THREE.BufferGeometry();
-        const dotsPos = new Float32Array(dotsCount * 3);
+            const randomX = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 3;
+            const randomY = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 3;
+            const randomZ = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 3;
 
-        for(let i = 0; i < dotsCount * 3; i++) {
-            dotsPos[i] = (Math.random() - 0.5) * 50;
+            galaxyPositions[i3] = Math.cos(spinAngle + branchAngle) * radius + randomX;
+            galaxyPositions[i3 + 1] = randomY;
+            galaxyPositions[i3 + 2] = Math.sin(spinAngle + branchAngle) * radius + randomZ;
+
+            // Mixed Red vs Blue color assignment based on branch / radius
+            let mixedColor = colorRed.clone();
+            if (i % 2 === 0) {
+                mixedColor.lerp(colorBlue, radius / 30);
+            } else {
+                mixedColor.lerp(colorDeepBlue, Math.random());
+            }
+
+            galaxyColors[i3] = mixedColor.r;
+            galaxyColors[i3 + 1] = mixedColor.g;
+            galaxyColors[i3 + 2] = mixedColor.b;
         }
 
-        dotsGeo.setAttribute('position', new THREE.BufferAttribute(dotsPos, 3));
-        const dotsMat = new THREE.PointsMaterial({
-            size: 0.15,
-            color: 0x0284c7,
+        galaxyGeo.setAttribute('position', new THREE.BufferAttribute(galaxyPositions, 3));
+        galaxyGeo.setAttribute('color', new THREE.BufferAttribute(galaxyColors, 3));
+
+        const galaxyMat = new THREE.PointsMaterial({
+            size: 0.16,
+            vertexColors: true,
             transparent: true,
-            opacity: 0.4
+            opacity: 0.85,
+            blending: THREE.AdditiveBlending
         });
-        const dotsMesh = new THREE.Points(dotsGeo, dotsMat);
-        scene.add(dotsMesh);
 
-        scene.add(group);
-        camera.position.z = 20;
+        const galaxy = new THREE.Points(galaxyGeo, galaxyMat);
+        galaxy.position.z = -5;
+        galaxy.rotation.x = Math.PI / 5;
+        scene.add(galaxy);
 
-        // Mouse Parallax Interaction
+        // -------------------------------------------------------------
+        // 2. Deep Space Stars (Distant Background)
+        // -------------------------------------------------------------
+        const starCount = 800;
+        const starGeo = new THREE.BufferGeometry();
+        const starPos = new Float32Array(starCount * 3);
+
+        for (let i = 0; i < starCount * 3; i += 3) {
+            starPos[i] = (Math.random() - 0.5) * 80;
+            starPos[i + 1] = (Math.random() - 0.5) * 80;
+            starPos[i + 2] = (Math.random() - 0.5) * 80;
+        }
+
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
+        const starMat = new THREE.PointsMaterial({ size: 0.08, color: 0xffffff, transparent: true, opacity: 0.6 });
+        const starField = new THREE.Points(starGeo, starMat);
+        scene.add(starField);
+
+        // -------------------------------------------------------------
+        // 3. Central Mecha Core Reactor (Red Core + Blue Orbital Shields)
+        // -------------------------------------------------------------
+        const mechaGroup = new THREE.Group();
+
+        // Inner Red Core (Pulsing Energy Icosahedron)
+        const coreGeo = new THREE.IcosahedronGeometry(2.5, 0);
+        const coreMat = new THREE.MeshBasicMaterial({ color: 0xff0055, wireframe: true });
+        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+        mechaGroup.add(coreMesh);
+
+        // Blue Outer Energy Shield Ring 1
+        const ring1Geo = new THREE.TorusGeometry(5.5, 0.08, 16, 100);
+        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x00d2ff, wireframe: true });
+        const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+        mechaGroup.add(ring1);
+
+        // Deep Blue Orbit Ring 2
+        const ring2Geo = new THREE.TorusGeometry(7.2, 0.06, 16, 100);
+        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x0044ff, wireframe: true });
+        const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+        ring2.rotation.x = Math.PI / 2.5;
+        mechaGroup.add(ring2);
+
+        scene.add(mechaGroup);
+
+        camera.position.z = 18;
+
+        // Interactive Parallax Tracking
         let mouseX = 0;
         let mouseY = 0;
 
@@ -415,29 +538,43 @@
             mouseY = (e.clientY / window.innerHeight) - 0.5;
         });
 
+        // Animation Loop
         const clock = new THREE.Clock();
 
         function animate() {
             requestAnimationFrame(animate);
             const time = clock.getElapsedTime();
 
-            ring1.rotation.y = time * 0.2;
-            ring1.rotation.x = time * 0.1;
+            // Rotate Galaxy
+            galaxy.rotation.y = time * 0.05;
 
-            ring2.rotation.y = -time * 0.15;
-            ring2.rotation.z = time * 0.1;
+            // Background Stars Drift
+            starField.rotation.y = time * 0.01;
 
-            dotsMesh.rotation.y = time * 0.03;
+            // Mech Reactor Dynamics
+            coreMesh.rotation.x = time * 0.5;
+            coreMesh.rotation.y = time * 0.7;
 
-            // Smooth reaction to cursor
-            group.rotation.y += (mouseX * 0.4 - group.rotation.y) * 0.05;
-            group.rotation.x += (mouseY * 0.4 - group.rotation.x) * 0.05;
+            // Pulsing effect on inner red core
+            const pulse = Math.sin(time * 3) * 0.15 + 1;
+            coreMesh.scale.set(pulse, pulse, pulse);
+
+            ring1.rotation.y = time * 0.6;
+            ring1.rotation.z = time * 0.3;
+
+            ring2.rotation.x = -time * 0.4;
+            ring2.rotation.y = time * 0.5;
+
+            // Smooth Parallax Mouse Tracking
+            mechaGroup.rotation.y += (mouseX * 0.6 - mechaGroup.rotation.y) * 0.05;
+            mechaGroup.rotation.x += (mouseY * 0.6 - mechaGroup.rotation.x) * 0.05;
 
             renderer.render(scene, camera);
         }
 
         animate();
 
+        // Responsive Screen Resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();

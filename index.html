@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistify | Cosmic-Mech Red-Blue Void</title>
+    <title>Assistify | Emerald-Cyan Cosmic Void</title>
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,16 +12,17 @@
 
     <style>
         :root {
-            --bg-deep: #030108;
+            --bg-deep: #02010a;
             --text-main: #f8fafc;
-            --accent-red: #ff0055;
-            --accent-blue: #00d2ff;
-            --accent-deep-blue: #0044ff;
-            /* 5% Opacity Background Palette */
-            --glass-card: rgba(8, 4, 18, 0.05); 
-            --glass-border: rgba(255, 0, 85, 0.45);
-            --btn-bg: rgba(22, 12, 38, 0.05);
-            --dual-gradient: linear-gradient(135deg, var(--accent-red), var(--accent-deep-blue));
+            /* New Assistify Brand Color Palette (Neon Emerald & Cyber Cyan) */
+            --accent-emerald: #00ffaa;
+            --accent-cyan: #00f3ff;
+            --accent-violet: #8a2be2;
+            /* 2% Opacity Background Palette */
+            --glass-card: rgba(4, 18, 12, 0.02); 
+            --glass-border: rgba(0, 255, 170, 0.35);
+            --btn-bg: rgba(6, 28, 20, 0.02);
+            --dual-gradient: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
         }
 
         * {
@@ -53,7 +54,7 @@
             pointer-events: none;
         }
 
-        /* 5% Opacity Cyber HUD Card Frame */
+        /* 2% Opacity Cyber HUD Card Frame */
         .cyber-card {
             position: relative;
             z-index: 1;
@@ -62,14 +63,14 @@
             margin: 40px auto;
             padding: 42px 26px;
             background: var(--glass-card);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             box-shadow: 
-                0 0 35px rgba(255, 0, 85, 0.25),
-                0 0 70px rgba(0, 210, 255, 0.2),
-                inset 0 0 15px rgba(255, 255, 255, 0.03);
+                0 0 35px rgba(0, 255, 170, 0.2),
+                0 0 70px rgba(0, 243, 255, 0.15),
+                inset 0 0 15px rgba(255, 255, 255, 0.02);
             text-align: center;
             animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
@@ -84,13 +85,13 @@
         }
         .cyber-card::before {
             top: 12px; left: 12px;
-            border-top: 2px solid var(--accent-red);
-            border-left: 2px solid var(--accent-red);
+            border-top: 2px solid var(--accent-emerald);
+            border-left: 2px solid var(--accent-emerald);
         }
         .cyber-card::after {
             bottom: 12px; right: 12px;
-            border-bottom: 2px solid var(--accent-blue);
-            border-right: 2px solid var(--accent-blue);
+            border-bottom: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
         }
 
         @keyframes cardAppear {
@@ -98,7 +99,7 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Mech Avatar with Dual Red/Blue Energy Orbit */
+        /* Mech Avatar with Emerald & Cyan Energy Rings */
         .avatar-wrapper {
             position: relative;
             width: 128px;
@@ -106,19 +107,19 @@
             margin: 0 auto 22px;
         }
 
-        .avatar-ring-red {
+        .avatar-ring-emerald {
             position: absolute;
             top: -8px;
             left: -8px;
             width: 144px;
             height: 144px;
             border-radius: 50%;
-            border: 2px dashed var(--accent-red);
+            border: 2px dashed var(--accent-emerald);
             animation: spinClockwise 16s linear infinite;
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.4);
         }
 
-        .avatar-ring-blue {
+        .avatar-ring-cyan {
             position: absolute;
             top: -4px;
             left: -4px;
@@ -126,8 +127,8 @@
             height: 136px;
             border-radius: 50%;
             border: 2px solid transparent;
-            border-top-color: var(--accent-blue);
-            border-bottom-color: var(--accent-deep-blue);
+            border-top-color: var(--accent-cyan);
+            border-bottom-color: var(--accent-violet);
             animation: spinCounter 10s linear infinite;
         }
 
@@ -143,8 +144,8 @@
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid var(--accent-blue);
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.5);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.5);
         }
 
         /* Header & Neon Branding */
@@ -157,31 +158,32 @@
         }
 
         .robot-icon {
-            font-size: 26px;
+            font-size: 28px;
             background: var(--dual-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 10px var(--accent-red));
+            filter: drop-shadow(0 0 12px var(--accent-emerald));
         }
 
         h1 {
-            font-size: 30px;
+            font-size: 32px;
             font-weight: 900;
-            letter-spacing: 2px;
-            background: linear-gradient(135deg, #ffffff 0%, var(--accent-red) 50%, var(--accent-blue) 100%);
+            letter-spacing: 2.5px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-emerald) 50%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
+            filter: drop-shadow(0 0 8px rgba(0, 255, 170, 0.3));
         }
 
         .subtitle {
             font-size: 12px;
-            color: var(--accent-blue);
+            color: var(--accent-emerald);
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 12px;
             font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 210, 255, 0.7);
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.8);
         }
 
         .bio {
@@ -192,7 +194,7 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
         }
 
-        /* Social Icons (5% Opacity) */
+        /* Social Icons (2% Opacity) */
         .social-grid {
             display: flex;
             justify-content: center;
@@ -204,8 +206,8 @@
             width: 48px;
             height: 48px;
             border-radius: 12px;
-            background: rgba(22, 12, 38, 0.05);
-            border: 1px solid rgba(255, 0, 85, 0.35);
+            background: rgba(6, 28, 20, 0.02);
+            border: 1px solid rgba(0, 255, 170, 0.3);
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -217,13 +219,13 @@
 
         .social-link:hover {
             color: #ffffff;
-            border-color: var(--accent-blue);
+            border-color: var(--accent-emerald);
             transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 5px 25px rgba(0, 210, 255, 0.5);
-            background: linear-gradient(135deg, rgba(255, 0, 85, 0.45), rgba(0, 68, 255, 0.45));
+            box-shadow: 0 5px 25px rgba(0, 255, 170, 0.5);
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.3), rgba(0, 243, 255, 0.3));
         }
 
-        /* 5% Opacity Link Buttons */
+        /* 2% Opacity Link Buttons */
         .links-wrapper {
             display: flex;
             flex-direction: column;
@@ -238,13 +240,13 @@
             justify-content: space-between;
             padding: 16px 20px;
             background: var(--btn-bg);
-            backdrop-filter: blur(2px);
+            backdrop-filter: blur(1px);
             color: var(--text-main);
             text-decoration: none;
             border-radius: 14px;
             font-weight: 700;
             font-size: 15px;
-            border: 1px solid rgba(0, 210, 255, 0.3);
+            border: 1px solid rgba(0, 243, 255, 0.25);
             transition: all 0.3s ease;
             overflow: hidden;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
@@ -257,29 +259,29 @@
             top: 0;
             width: 4px;
             height: 100%;
-            background: var(--accent-red);
+            background: var(--accent-emerald);
             transition: all 0.3s ease;
         }
 
         .mecha-btn:hover {
-            border-color: var(--accent-red);
+            border-color: var(--accent-emerald);
             transform: translateX(4px) translateY(-2px);
-            box-shadow: 0 8px 30px rgba(255, 0, 85, 0.35);
-            background: rgba(255, 0, 85, 0.2);
+            box-shadow: 0 8px 30px rgba(0, 255, 170, 0.35);
+            background: rgba(0, 255, 170, 0.15);
         }
 
         .mecha-btn:hover::before {
             width: 100%;
             background: var(--dual-gradient);
-            opacity: 0.2;
+            opacity: 0.15;
         }
 
         .btn-tag {
             font-size: 10px;
             padding: 4px 8px;
-            background: rgba(255, 0, 85, 0.2);
-            border: 1px solid var(--accent-red);
-            color: #ff6699;
+            background: rgba(0, 255, 170, 0.15);
+            border: 1px solid var(--accent-emerald);
+            color: var(--accent-emerald);
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -287,18 +289,18 @@
         }
 
         .mecha-btn:hover .btn-tag {
-            background: rgba(0, 210, 255, 0.25);
-            border-color: var(--accent-blue);
-            color: var(--accent-blue);
+            background: rgba(0, 243, 255, 0.25);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
         }
 
-        /* 5% Opacity Contact Box */
+        /* 2% Opacity Contact Box */
         .contact-box {
-            background: rgba(6, 3, 16, 0.05);
-            backdrop-filter: blur(2px);
+            background: rgba(4, 18, 12, 0.02);
+            backdrop-filter: blur(1px);
             padding: 22px 18px;
             border-radius: 16px;
-            border: 1px solid rgba(255, 0, 85, 0.3);
+            border: 1px solid rgba(0, 255, 170, 0.25);
             text-align: left;
             position: relative;
         }
@@ -308,19 +310,19 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 14px;
-            color: var(--accent-red);
+            color: var(--accent-emerald);
             display: flex;
             align-items: center;
             gap: 8px;
             font-weight: 800;
-            text-shadow: 0 0 8px rgba(255, 0, 85, 0.5);
+            text-shadow: 0 0 8px rgba(0, 255, 170, 0.5);
         }
 
         .input-field {
             width: 100%;
             padding: 12px 14px;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.12);
             border-radius: 8px;
             color: #fff;
             font-size: 13px;
@@ -334,9 +336,9 @@
 
         .input-field:focus {
             outline: none;
-            border-color: var(--accent-blue);
-            background: rgba(0, 0, 0, 0.55);
-            box-shadow: 0 0 12px rgba(0, 210, 255, 0.4);
+            border-color: var(--accent-cyan);
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
         }
 
         textarea.input-field {
@@ -348,22 +350,22 @@
             width: 100%;
             padding: 14px;
             background: var(--dual-gradient);
-            color: #ffffff;
+            color: #02010a;
             border: none;
             border-radius: 10px;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(255, 0, 85, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 255, 170, 0.4);
         }
 
         .submit-btn:hover {
-            box-shadow: 0 6px 25px rgba(0, 210, 255, 0.6);
+            box-shadow: 0 6px 25px rgba(0, 243, 255, 0.6);
             transform: translateY(-2px);
-            filter: brightness(1.2);
+            filter: brightness(1.15);
         }
     </style>
 </head>
@@ -375,10 +377,10 @@
     <!-- Main Content Card -->
     <div class="cyber-card">
         
-        <!-- Profile Pic with Dual Red & Blue Rings -->
+        <!-- Profile Pic with Dual Emerald & Cyan Rings -->
         <div class="avatar-wrapper">
-            <div class="avatar-ring-red"></div>
-            <div class="avatar-ring-blue"></div>
+            <div class="avatar-ring-emerald"></div>
+            <div class="avatar-ring-cyan"></div>
             <img src="https://via.placeholder.com/128" alt="Assistify Profile" class="profile-pic">
         </div>
         
@@ -387,7 +389,7 @@
             <i class="fa-solid fa-robot robot-icon"></i>
             <h1>ASSISTIFY</h1>
         </div>
-        <div class="subtitle">Red-Blue Cosmic Void</div>
+        <div class="subtitle">Emerald-Cyan Cosmic Void</div>
         <p class="bio">Exploring Multiverse Storytelling, Sci-Fi Visuals & Mecha Universes</p>
         
         <!-- Social Links -->
@@ -438,27 +440,27 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // 1. Cosmic Lighting Setup
-        const ambientLight = new THREE.AmbientLight(0x332244, 1.2);
+        // 1. Cosmic Lighting Setup (Emerald & Cyan Highlights)
+        const ambientLight = new THREE.AmbientLight(0x112233, 1.2);
         scene.add(ambientLight);
 
-        const redLight = new THREE.PointLight(0xff0055, 4, 80);
-        redLight.position.set(-20, 15, 10);
-        scene.add(redLight);
+        const emeraldLight = new THREE.PointLight(0x00ffaa, 4, 80);
+        emeraldLight.position.set(-20, 15, 10);
+        scene.add(emeraldLight);
 
-        const blueLight = new THREE.PointLight(0x00d2ff, 4, 80);
-        blueLight.position.set(20, -15, 10);
-        scene.add(blueLight);
+        const cyanLight = new THREE.PointLight(0x00f3ff, 4, 80);
+        cyanLight.position.set(20, -15, 10);
+        scene.add(cyanLight);
 
-        // 2. Cosmic Spiral Galaxy (Red & Blue Universe)
+        // 2. Cosmic Spiral Galaxy (Emerald & Cyan Palette)
         const galaxyParticleCount = 2800;
         const galaxyGeo = new THREE.BufferGeometry();
         const galaxyPositions = new Float32Array(galaxyParticleCount * 3);
         const galaxyColors = new Float32Array(galaxyParticleCount * 3);
 
-        const colorRed = new THREE.Color(0xff0055);
-        const colorBlue = new THREE.Color(0x00d2ff);
-        const colorDeepBlue = new THREE.Color(0x0022ff);
+        const colorEmerald = new THREE.Color(0x00ffaa);
+        const colorCyan = new THREE.Color(0x00f3ff);
+        const colorViolet = new THREE.Color(0x8a2be2);
 
         for (let i = 0; i < galaxyParticleCount; i++) {
             const i3 = i * 3;
@@ -474,11 +476,11 @@
             galaxyPositions[i3 + 1] = randomY;
             galaxyPositions[i3 + 2] = Math.sin(spinAngle + branchAngle) * radius + randomZ;
 
-            let mixedColor = colorRed.clone();
+            let mixedColor = colorEmerald.clone();
             if (i % 2 === 0) {
-                mixedColor.lerp(colorBlue, radius / 32);
+                mixedColor.lerp(colorCyan, radius / 32);
             } else {
-                mixedColor.lerp(colorDeepBlue, Math.random());
+                mixedColor.lerp(colorViolet, Math.random());
             }
 
             galaxyColors[i3] = mixedColor.r;
@@ -523,10 +525,10 @@
         const planetGroup1 = new THREE.Group();
         const planetGeo1 = new THREE.SphereGeometry(3.2, 64, 64);
         const planetMat1 = new THREE.MeshPhongMaterial({
-            color: 0x110822,
-            emissive: 0x330015,
-            specular: 0x00d2ff,
-            shininess: 25
+            color: 0x051a14,
+            emissive: 0x003322,
+            specular: 0x00f3ff,
+            shininess: 30
         });
         const planet1 = new THREE.Mesh(planetGeo1, planetMat1);
         planetGroup1.add(planet1);
@@ -534,7 +536,7 @@
         // Planet 1 Orbital Ring
         const ringGeo = new THREE.RingGeometry(4.2, 6.5, 64);
         const ringMat = new THREE.MeshStandardMaterial({
-            color: 0x00d2ff,
+            color: 0x00ffaa,
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.65,
@@ -552,7 +554,7 @@
         const planetMat2 = new THREE.MeshPhongMaterial({
             color: 0x002244,
             emissive: 0x001122,
-            specular: 0xff0055,
+            specular: 0x00ffaa,
             shininess: 15
         });
         const planet2 = new THREE.Mesh(planetGeo2, planetMat2);
@@ -565,14 +567,14 @@
 
             // Cockpit / Fuselage
             const bodyGeo = new THREE.ConeGeometry(0.4, 2.0, 5);
-            const bodyMat = new THREE.MeshStandardMaterial({ color: 0x181528, roughness: 0.2, metalness: 0.8 });
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0x0d1f1a, roughness: 0.2, metalness: 0.8 });
             const body = new THREE.Mesh(bodyGeo, bodyMat);
             body.rotation.x = Math.PI / 2;
             shipGroup.add(body);
 
             // Wing Structure
             const wingGeo = new THREE.BoxGeometry(2.0, 0.04, 0.7);
-            const wingMat = new THREE.MeshStandardMaterial({ color: 0x0a0814, metalness: 0.9 });
+            const wingMat = new THREE.MeshStandardMaterial({ color: 0x051410, metalness: 0.9 });
             const wings = new THREE.Mesh(wingGeo, wingMat);
             wings.position.z = 0.2;
             shipGroup.add(wings);
@@ -592,7 +594,7 @@
 
         // Generate a squad of 7 tiny spaceships patrolling space
         const tinyShips = [];
-        const engineColors = [0xff0055, 0x00d2ff, 0x00ffcc, 0xffaa00, 0x0044ff];
+        const engineColors = [0x00ffaa, 0x00f3ff, 0x8a2be2, 0xffaa00, 0x00ffcc];
 
         for (let i = 0; i < 7; i++) {
             const color = engineColors[i % engineColors.length];

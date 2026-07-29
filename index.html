@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistify | Link in Bio</title>
+    <title>Assistify | Cosmic-Mech Bio</title>
     
-    <!-- Font Awesome for Social Icons -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Three.js for Interactive 3D Canvas -->
+    <!-- Three.js Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
-            --bg-color: #030712;
-            --text-color: #f8fafc;
-            --glass-bg: rgba(15, 23, 42, 0.55);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --accent-glow: rgba(56, 189, 248, 0.35);
+            --bg-deep: #05020a;
+            --text-main: #f8fafc;
+            --accent-orange: #ff6b00;
+            --accent-cyan: #00f2fe;
+            --accent-violet: #8b5cf6;
+            --glass-card: rgba(15, 10, 28, 0.7);
+            --glass-border: rgba(255, 107, 0, 0.25);
+            --metal-gradient: linear-gradient(135deg, #2a2438, #130f1e);
         }
 
         * {
@@ -26,9 +29,9 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -37,8 +40,8 @@
             position: relative;
         }
 
-        /* 3D Canvas Layer */
-        #webgl-bg {
+        /* 3D Background Canvas Layer */
+        #webgl-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -48,225 +51,324 @@
             pointer-events: none;
         }
 
-        /* Content Container with Glassmorphism Overlay */
-        .container {
+        /* Main Glassmorphic Cyber-Card */
+        .cyber-card {
             position: relative;
             z-index: 1;
             width: 90%;
-            max-width: 440px;
+            max-width: 450px;
             margin: 40px auto;
             padding: 40px 24px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: var(--glass-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px var(--accent-glow);
+            border-radius: 20px;
+            box-shadow: 
+                0 0 40px rgba(255, 107, 0, 0.15),
+                0 0 80px rgba(0, 242, 254, 0.1),
+                inset 0 0 20px rgba(255, 255, 255, 0.03);
             text-align: center;
-            animation: fadeIn 1s ease-out;
+            animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Mech Avatar with Glowing Ring */
+        .avatar-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 20px;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            width: 132px;
+            height: 132px;
+            border-radius: 50%;
+            border: 2px dashed var(--accent-orange);
+            animation: spinRing 20s linear infinite;
+        }
+
+        @keyframes spinRing {
+            100% { transform: rotate(360deg); }
         }
 
         .profile-pic {
-            width: 110px;
-            height: 110px;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid rgba(255, 255, 255, 0.8);
-            margin-bottom: 16px;
-            box-shadow: 0 0 25px var(--accent-glow);
-            transition: transform 0.4s ease;
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
         }
 
-        .profile-pic:hover {
-            transform: scale(1.05) rotate(3deg);
+        /* Logo & Brand Typography */
+        .brand-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 6px;
+        }
+
+        .robot-icon {
+            font-size: 24px;
+            color: var(--accent-orange);
+            filter: drop-shadow(0 0 8px var(--accent-orange));
         }
 
         h1 {
             font-size: 28px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            background: linear-gradient(135deg, #fff 0%, #38bdf8 100%);
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-orange) 50%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
         .bio {
             font-size: 14px;
-            color: #94a3b8;
-            margin: 8px 0 24px;
+            color: #a7abb9;
+            margin-bottom: 24px;
             line-height: 1.5;
         }
 
-        .social-icons {
+        /* Social Icons */
+        .social-grid {
             display: flex;
             justify-content: center;
-            gap: 18px;
-            margin-bottom: 28px;
+            gap: 16px;
+            margin-bottom: 30px;
         }
 
-        .social-icon {
-            color: #cbd5e1;
-            font-size: 22px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
+        .social-link {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: var(--metal-gradient);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid var(--glass-border);
+            font-size: 20px;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .social-icon:hover {
-            color: #38bdf8;
-            background: rgba(56, 189, 248, 0.15);
-            border-color: #38bdf8;
+        .social-link:hover {
+            color: var(--accent-orange);
+            border-color: var(--accent-orange);
             transform: translateY(-4px);
-            box-shadow: 0 5px 15px var(--accent-glow);
+            box-shadow: 0 5px 20px rgba(255, 107, 0, 0.35);
         }
 
-        .links-container {
+        /* Link Buttons */
+        .links-wrapper {
             display: flex;
             flex-direction: column;
             gap: 14px;
-            margin-bottom: 28px;
+            margin-bottom: 30px;
         }
 
-        .link-btn {
+        .mecha-btn {
+            position: relative;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.04);
-            color: var(--text-color);
+            background: var(--metal-gradient);
+            color: var(--text-main);
             text-decoration: none;
-            border-radius: 14px;
-            font-weight: 600;
+            border-radius: 12px;
+            font-weight: 700;
             font-size: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid var(--glass-border);
-            position: relative;
+            border: 1px solid rgba(255, 107, 0, 0.2);
+            transition: all 0.3s ease;
             overflow: hidden;
         }
 
-        .link-btn:hover {
-            background: rgba(56, 189, 248, 0.2);
-            border-color: #38bdf8;
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.25);
+        .mecha-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
         }
 
-        .contact-section {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid var(--glass-border);
+        .mecha-btn:hover {
+            border-color: var(--accent-cyan);
+            transform: translateX(4px) translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 242, 254, 0.25);
+        }
+
+        .mecha-btn:hover::before {
+            width: 100%;
+            opacity: 0.1;
+        }
+
+        .btn-tag {
+            font-size: 10px;
+            padding: 4px 8px;
+            background: rgba(255, 107, 0, 0.2);
+            border: 1px solid var(--accent-orange);
+            color: var(--accent-orange);
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Contact Form Section */
+        .contact-box {
+            background: rgba(10, 6, 20, 0.6);
+            padding: 22px 18px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
             text-align: left;
         }
 
-        .contact-section h2 {
-            font-size: 16px;
-            margin-bottom: 12px;
-            text-align: center;
-            color: #e2e8f0;
+        .contact-title {
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+            color: var(--accent-orange);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .form-group {
-            margin-bottom: 12px;
-        }
-
-        .form-control {
+        .input-field {
             width: 100%;
-            padding: 12px;
-            background: rgba(15, 23, 42, 0.7);
-            border: 1px solid var(--glass-border);
-            border-radius: 10px;
-            color: #f8fafc;
-            font-size: 14px;
+            padding: 12px 14px;
+            background: rgba(20, 15, 35, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 13px;
+            margin-bottom: 12px;
             transition: border-color 0.3s ease;
         }
 
-        .form-control:focus {
+        .input-field:focus {
             outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.2);
         }
 
-        textarea.form-control {
+        textarea.input-field {
             resize: vertical;
             min-height: 80px;
         }
 
         .submit-btn {
             width: 100%;
-            padding: 12px;
-            background: linear-gradient(135deg, #38bdf8, #3b82f6);
-            color: #020617;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent-orange), #e65100);
+            color: #ffffff;
             border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 15px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
         }
 
         .submit-btn:hover {
-            opacity: 0.9;
-            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, #ff7b1a, var(--accent-orange));
+            box-shadow: 0 6px 20px rgba(255, 107, 0, 0.5);
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <!-- 3D Canvas Background -->
-    <canvas id="webgl-bg"></canvas>
+    <!-- 3D WebGL Canvas Layer -->
+    <canvas id="webgl-canvas"></canvas>
 
-    <!-- Interactive Card -->
-    <div class="container">
-        <img src="https://via.placeholder.com/110" alt="Assistify Profile" class="profile-pic">
+    <!-- Main Content Card -->
+    <div class="cyber-card">
         
-        <h1>Assistify</h1>
-        <p class="bio">Cinematic Visuals & Storytelling</p>
+        <!-- Profile Pic with Spinning Ring -->
+        <div class="avatar-wrapper">
+            <div class="avatar-ring"></div>
+            <img src="https://via.placeholder.com/120" alt="Assistify Profile" class="profile-pic">
+        </div>
         
-        <div class="social-icons">
-            <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-icon" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-            <a href="#" class="social-icon" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+        <!-- Header & Logo -->
+        <div class="brand-header">
+            <i class="fa-solid fa-robot robot-icon"></i>
+            <h1>ASSISTIFY</h1>
+        </div>
+        <div class="subtitle">Astro-Mech Visuals</div>
+        <p class="bio">Exploring Cosmic Universes & AI Storytelling</p>
+        
+        <!-- Social Icons -->
+        <div class="social-grid">
+            <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+            <a href="#" class="social-link" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
         </div>
 
-        <div class="links-container">
-            <a href="#" class="link-btn">🎬 Latest Cinematic Short</a>
-            <a href="#" class="link-btn">📖 "Rain Between Us" Project</a>
+        <!-- Links Section -->
+        <div class="links-wrapper">
+            <a href="#" class="mecha-btn">
+                <span>🎬 Latest Cinematic Short</span>
+                <span class="btn-tag">Watch</span>
+            </a>
+            <a href="#" class="mecha-btn">
+                <span>📖 "Rain Between Us" Project</span>
+                <span class="btn-tag">Story</span>
+            </a>
+            <a href="#" class="mecha-btn">
+                <span>🤖 AI Sci-Fi Portfolio</span>
+                <span class="btn-tag">Gallery</span>
+            </a>
         </div>
 
-        <div class="contact-section">
-            <h2>Get in Touch</h2>
+        <!-- Contact Form -->
+        <div class="contact-box">
+            <div class="contact-title">
+                <i class="fa-solid fa-satellite-dish"></i> Direct Transmission
+            </div>
+            <!-- Replace "YOUR_FORM_ID" with your actual Formspree ID -->
             <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-                <div class="form-group">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea name="message" class="form-control" placeholder="Discuss a collaboration or inquiry..." required></textarea>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
+                <input type="text" name="name" class="input-field" placeholder="Commander / Name" required>
+                <input type="email" name="email" class="input-field" placeholder="Sub-space Email" required>
+                <textarea name="message" class="input-field" placeholder="State your mission objective or inquiry..." required></textarea>
+                <button type="submit" class="submit-btn">Send Signal</button>
             </form>
         </div>
     </div>
 
-    <!-- 3D Animation Script -->
+    <!-- 3D Animated Engine Script -->
     <script>
-        const canvas = document.getElementById('webgl-bg');
+        const canvas = document.getElementById('webgl-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
@@ -274,74 +376,111 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // Create 3D Wireframe Plane / Torus
-        const geometry = new THREE.TorusKnotGeometry(10, 3, 100, 16);
-        const material = new THREE.MeshBasicMaterial({ 
-            color: 0x38bdf8, 
-            wireframe: true,
-            transparent: true,
-            opacity: 0.15 
-        });
-        const torusKnot = new THREE.Mesh(geometry, material);
-        scene.add(torusKnot);
+        // 1. Cosmic Starfield Particles (Universe Element)
+        const starCount = 600;
+        const starGeo = new THREE.BufferGeometry();
+        const starPositions = new Float32Array(starCount * 3);
+        const starColors = new Float32Array(starCount * 3);
 
-        // Add Floating Particle Field
-        const particlesGeometry = new THREE.BufferGeometry();
-        const particlesCount = 300;
-        const posArray = new Float32Array(particlesCount * 3);
+        const colorPalette = [
+            new THREE.Color(0xff6b00), // Electric Orange
+            new THREE.Color(0x00f2fe), // Cyan
+            new THREE.Color(0x8b5cf6), // Violet
+            new THREE.Color(0xffffff)  // Bright Star White
+        ];
 
-        for(let i=0; i<particlesCount*3; i++) {
-            posArray[i] = (Math.random() - 0.5) * 50;
+        for(let i = 0; i < starCount * 3; i += 3) {
+            starPositions[i] = (Math.random() - 0.5) * 60;
+            starPositions[i+1] = (Math.random() - 0.5) * 60;
+            starPositions[i+2] = (Math.random() - 0.5) * 60;
+
+            const randomColor = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+            starColors[i] = randomColor.r;
+            starColors[i+1] = randomColor.g;
+            starColors[i+2] = randomColor.b;
         }
 
-        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-        const particlesMaterial = new THREE.PointsMaterial({
-            size: 0.08,
-            color: 0x3b82f6,
+        starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+        starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+        const starMat = new THREE.PointsMaterial({
+            size: 0.12,
+            vertexColors: true,
             transparent: true,
-            opacity: 0.6
+            opacity: 0.8
         });
-        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-        scene.add(particlesMesh);
 
-        camera.position.z = 25;
+        const starField = new THREE.Points(starGeo, starMat);
+        scene.add(starField);
 
-        // Mouse Parallax Interaction
+        // 2. Mecha Gyro Reactor Core (Robot/Mecha Element)
+        const mechaGroup = new THREE.Group();
+
+        // Inner Core (Glowing Octahedron)
+        const coreGeo = new THREE.OctahedronGeometry(3, 0);
+        const coreMat = new THREE.MeshBasicMaterial({ 
+            color: 0xff6b00, 
+            wireframe: true 
+        });
+        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
+        mechaGroup.add(coreMesh);
+
+        // Outer Ring 1 (Torus)
+        const ring1Geo = new THREE.TorusGeometry(6, 0.1, 16, 100);
+        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x00f2fe, wireframe: true });
+        const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
+        mechaGroup.add(ring1);
+
+        // Outer Ring 2 (Offset Gyro Ring)
+        const ring2Geo = new THREE.TorusGeometry(8, 0.08, 16, 100);
+        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x8b5cf6, wireframe: true });
+        const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
+        ring2.rotation.x = Math.PI / 3;
+        mechaGroup.add(ring2);
+
+        scene.add(mechaGroup);
+
+        camera.position.z = 18;
+
+        // Interactive Parallax Tracking
         let mouseX = 0;
         let mouseY = 0;
 
-        document.addEventListener('mousemove', (event) => {
-            mouseX = (event.clientX / window.innerWidth) - 0.5;
-            mouseY = (event.clientY / window.innerHeight) - 0.5;
+        document.addEventListener('mousemove', (e) => {
+            mouseX = (e.clientX / window.innerWidth) - 0.5;
+            mouseY = (e.clientY / window.innerHeight) - 0.5;
         });
 
         // Animation Loop
-        let clock = new THREE.Clock();
+        const clock = new THREE.Clock();
 
         function animate() {
             requestAnimationFrame(animate);
-            const elapsedTime = clock.getElapsedTime();
+            const time = clock.getElapsedTime();
 
-            // Continuous rotation
-            torusKnot.rotation.x = elapsedTime * 0.15;
-            torusKnot.rotation.y = elapsedTime * 0.2;
+            // Rotate Starfield
+            starField.rotation.y = time * 0.02;
 
-            particlesMesh.rotation.y = -elapsedTime * 0.05;
+            // Gyro Core Rotations
+            coreMesh.rotation.x = time * 0.4;
+            coreMesh.rotation.y = time * 0.6;
 
-            // Reactive Mouse Movement
-            torusKnot.rotation.x += mouseY * 0.05;
-            torusKnot.rotation.y += mouseX * 0.05;
+            ring1.rotation.y = time * 0.5;
+            ring1.rotation.z = time * 0.2;
 
-            // Color shift over time
-            let hue = (elapsedTime * 10) % 360;
-            material.color.setHSL(hue / 360, 0.7, 0.5);
+            ring2.rotation.x = -time * 0.3;
+            ring2.rotation.y = time * 0.4;
+
+            // Smooth Mouse Parallax
+            mechaGroup.rotation.y += (mouseX * 0.5 - mechaGroup.rotation.y) * 0.05;
+            mechaGroup.rotation.x += (mouseY * 0.5 - mechaGroup.rotation.x) * 0.05;
 
             renderer.render(scene, camera);
         }
 
         animate();
 
-        // Responsive Resizing
+        // Screen Resize Listener
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();

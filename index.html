@@ -17,10 +17,10 @@
             --accent-red: #ff0055;
             --accent-blue: #00d2ff;
             --accent-deep-blue: #0044ff;
-            /* Completely Transparent Background Palette */
-            --glass-card: transparent; 
-            --glass-border: rgba(255, 0, 85, 0.5);
-            --metal-gradient: rgba(255, 255, 255, 0.03);
+            /* 20% Opacity Background Palette */
+            --glass-card: rgba(8, 4, 18, 0.20); 
+            --glass-border: rgba(255, 0, 85, 0.45);
+            --btn-bg: rgba(22, 12, 38, 0.20);
             --dual-gradient: linear-gradient(135deg, var(--accent-red), var(--accent-deep-blue));
         }
 
@@ -53,7 +53,7 @@
             pointer-events: none;
         }
 
-        /* Fully Transparent Cyber HUD Card */
+        /* 20% Opacity Cyber HUD Card Frame */
         .cyber-card {
             position: relative;
             z-index: 1;
@@ -61,14 +61,14 @@
             max-width: 460px;
             margin: 40px auto;
             padding: 42px 26px;
-            background: transparent;
-            backdrop-filter: none;
-            -webkit-backdrop-filter: none;
+            background: var(--glass-card);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             box-shadow: 
-                0 0 30px rgba(255, 0, 85, 0.25),
-                0 0 60px rgba(0, 210, 255, 0.2),
+                0 0 35px rgba(255, 0, 85, 0.25),
+                0 0 70px rgba(0, 210, 255, 0.2),
                 inset 0 0 15px rgba(255, 255, 255, 0.05);
             text-align: center;
             animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -98,7 +98,7 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* spaceship */
+        /* Mech Avatar with Dual Red/Blue Energy Orbit */
         .avatar-wrapper {
             position: relative;
             width: 128px;
@@ -127,15 +127,15 @@
             border-radius: 50%;
             border: 2px solid transparent;
             border-top-color: var(--accent-blue);
-            border-bottom-color: var(--accent-deep-red);
+            border-bottom-color: var(--accent-deep-blue);
             animation: spinCounter 10s linear infinite;
         }
 
         @keyframes spinClockwise {
-            20% { transform: rotate(360deg); }
+            100% { transform: rotate(360deg); }
         }
         @keyframes spinCounter {
-            20% { transform: rotate(-360deg); }
+            100% { transform: rotate(-360deg); }
         }
 
         .profile-pic {
@@ -189,10 +189,10 @@
             color: #cbd5e1;
             margin-bottom: 26px;
             line-height: 1.5;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
         }
 
-        /* Social Icons */
+        /* Social Icons (20% Opacity) */
         .social-grid {
             display: flex;
             justify-content: center;
@@ -204,8 +204,8 @@
             width: 48px;
             height: 48px;
             border-radius: 12px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 0, 85, 0.4);
+            background: rgba(22, 12, 38, 0.20);
+            border: 1px solid rgba(255, 0, 85, 0.35);
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -223,7 +223,7 @@
             background: linear-gradient(135deg, rgba(255, 0, 85, 0.45), rgba(0, 68, 255, 0.45));
         }
 
-        /* Fully Transparent Link Buttons */
+        /* 20% Opacity Link Buttons */
         .links-wrapper {
             display: flex;
             flex-direction: column;
@@ -237,13 +237,14 @@
             align-items: center;
             justify-content: space-between;
             padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.04);
+            background: var(--btn-bg);
+            backdrop-filter: blur(4px);
             color: var(--text-main);
             text-decoration: none;
             border-radius: 14px;
             font-weight: 700;
             font-size: 15px;
-            border: 1px solid rgba(0, 210, 255, 0.35);
+            border: 1px solid rgba(0, 210, 255, 0.3);
             transition: all 0.3s ease;
             overflow: hidden;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
@@ -264,7 +265,7 @@
             border-color: var(--accent-red);
             transform: translateX(4px) translateY(-2px);
             box-shadow: 0 8px 30px rgba(255, 0, 85, 0.35);
-            background: rgba(255, 0, 85, 0.1);
+            background: rgba(255, 0, 85, 0.25);
         }
 
         .mecha-btn:hover::before {
@@ -276,7 +277,7 @@
         .btn-tag {
             font-size: 10px;
             padding: 4px 8px;
-            background: rgba(255, 0, 85, 0.25);
+            background: rgba(255, 0, 85, 0.2);
             border: 1px solid var(--accent-red);
             color: #ff6699;
             border-radius: 6px;
@@ -291,9 +292,10 @@
             color: var(--accent-blue);
         }
 
-        /* Fully Transparent Contact Box */
+        /* 20% Opacity Contact Box */
         .contact-box {
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(6, 3, 16, 0.20);
+            backdrop-filter: blur(4px);
             padding: 22px 18px;
             border-radius: 16px;
             border: 1px solid rgba(255, 0, 85, 0.3);
@@ -317,8 +319,8 @@
         .input-field {
             width: 100%;
             padding: 12px 14px;
-            background: rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 8px;
             color: #fff;
             font-size: 13px;
@@ -426,7 +428,7 @@
         </div>
     </div>
 
-    <!-- 3D Multiverse & Mech Engine Script -->
+    <!-- 3D Multiverse, Planets & Spaceship Engine Script -->
     <script>
         const canvas = document.getElementById('webgl-canvas');
         const scene = new THREE.Scene();
@@ -436,8 +438,20 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // 1. Cosmic Spiral Galaxy (Red & Blue Universe)
-        const galaxyParticleCount = 2500;
+        // 1. Cosmic Lighting Setup
+        const ambientLight = new THREE.AmbientLight(0x332244, 1.2);
+        scene.add(ambientLight);
+
+        const redLight = new THREE.PointLight(0xff0055, 4, 80);
+        redLight.position.set(-20, 15, 10);
+        scene.add(redLight);
+
+        const blueLight = new THREE.PointLight(0x00d2ff, 4, 80);
+        blueLight.position.set(20, -15, 10);
+        scene.add(blueLight);
+
+        // 2. Cosmic Spiral Galaxy (Red & Blue Universe)
+        const galaxyParticleCount = 2800;
         const galaxyGeo = new THREE.BufferGeometry();
         const galaxyPositions = new Float32Array(galaxyParticleCount * 3);
         const galaxyColors = new Float32Array(galaxyParticleCount * 3);
@@ -448,7 +462,7 @@
 
         for (let i = 0; i < galaxyParticleCount; i++) {
             const i3 = i * 3;
-            const radius = Math.random() * 30 + 2;
+            const radius = Math.random() * 32 + 2;
             const spinAngle = radius * 0.4;
             const branchAngle = ((i % 2) * Math.PI); 
 
@@ -462,7 +476,7 @@
 
             let mixedColor = colorRed.clone();
             if (i % 2 === 0) {
-                mixedColor.lerp(colorBlue, radius / 30);
+                mixedColor.lerp(colorBlue, radius / 32);
             } else {
                 mixedColor.lerp(colorDeepBlue, Math.random());
             }
@@ -484,46 +498,103 @@
         });
 
         const galaxy = new THREE.Points(galaxyGeo, galaxyMat);
-        galaxy.position.z = -5;
+        galaxy.position.z = -6;
         galaxy.rotation.x = Math.PI / 5;
         scene.add(galaxy);
 
-        // 2. Deep Space Stars (Distant Background)
-        const starCount = 800;
+        // 3. Deep Space Stars Background
+        const starCount = 1000;
         const starGeo = new THREE.BufferGeometry();
         const starPos = new Float32Array(starCount * 3);
 
         for (let i = 0; i < starCount * 3; i += 3) {
-            starPos[i] = (Math.random() - 0.5) * 80;
-            starPos[i + 1] = (Math.random() - 0.5) * 80;
-            starPos[i + 2] = (Math.random() - 0.5) * 80;
+            starPos[i] = (Math.random() - 0.5) * 90;
+            starPos[i + 1] = (Math.random() - 0.5) * 90;
+            starPos[i + 2] = (Math.random() - 0.5) * 90;
         }
 
         starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-        const starMat = new THREE.PointsMaterial({ size: 0.08, color: 0xffffff, transparent: true, opacity: 0.6 });
+        const starMat = new THREE.PointsMaterial({ size: 0.08, color: 0xffffff, transparent: true, opacity: 0.7 });
         const starField = new THREE.Points(starGeo, starMat);
         scene.add(starField);
 
-        // 3. Central Mecha Core Reactor (Red Core + Blue Orbital Shields)
-        const mechaGroup = new THREE.Group();
+        // 4. PLANETS CREATION
+        // Planet 1: Ringed Gas Giant
+        const planetGroup1 = new THREE.Group();
+        const planetGeo1 = new THREE.SphereGeometry(3.2, 64, 64);
+        const planetMat1 = new THREE.MeshPhongMaterial({
+            color: 0x110822,
+            emissive: 0x330015,
+            specular: 0x00d2ff,
+            shininess: 25,
+            flatShading: false
+        });
+        const planet1 = new THREE.Mesh(planetGeo1, planetMat1);
+        planetGroup1.add(planet1);
 
-        const coreGeo = new THREE.IcosahedronGeometry(2.5, 0);
-        const coreMat = new THREE.MeshBasicMaterial({ color: 0xff0055, wireframe: true });
-        const coreMesh = new THREE.Mesh(coreGeo, coreMat);
-        mechaGroup.add(coreMesh);
+        // Planet 1 Orbital Ring
+        const ringGeo = new THREE.RingGeometry(4.2, 6.5, 64);
+        const ringMat = new THREE.MeshStandardMaterial({
+            color: 0x00d2ff,
+            side: THREE.DoubleSide,
+            transparent: true,
+            opacity: 0.65,
+            roughness: 0.3
+        });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2.2;
+        planetGroup1.add(ring);
 
-        const ring1Geo = new THREE.TorusGeometry(5.5, 0.08, 16, 100);
-        const ring1Mat = new THREE.MeshBasicMaterial({ color: 0x00d2ff, wireframe: true });
-        const ring1 = new THREE.Mesh(ring1Geo, ring1Mat);
-        mechaGroup.add(ring1);
+        planetGroup1.position.set(9, -2, -8);
+        scene.add(planetGroup1);
 
-        const ring2Geo = new THREE.TorusGeometry(7.2, 0.06, 16, 100);
-        const ring2Mat = new THREE.MeshBasicMaterial({ color: 0x0044ff, wireframe: true });
-        const ring2 = new THREE.Mesh(ring2Geo, ring2Mat);
-        ring2.rotation.x = Math.PI / 2.5;
-        mechaGroup.add(ring2);
+        // Planet 2: Small Ice Moon
+        const planetGeo2 = new THREE.SphereGeometry(1.4, 32, 32);
+        const planetMat2 = new THREE.MeshPhongMaterial({
+            color: 0x002244,
+            emissive: 0x001122,
+            specular: 0xff0055,
+            shininess: 15
+        });
+        const planet2 = new THREE.Mesh(planetGeo2, planetMat2);
+        planet2.position.set(-10, 6, -10);
+        scene.add(planet2);
 
-        scene.add(mechaGroup);
+        // 5. SCI-FI SPACESHIPS CREATION
+        function createSpaceship(colorHex) {
+            const shipGroup = new THREE.Group();
+
+            // Fuselage / Nose
+            const bodyGeo = new THREE.ConeGeometry(0.5, 2.2, 5);
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1a1a2e, roughness: 0.2, metalness: 0.8 });
+            const body = new THREE.Mesh(bodyGeo, bodyMat);
+            body.rotation.x = Math.PI / 2;
+            shipGroup.add(body);
+
+            // Wings
+            const wingGeo = new THREE.BoxGeometry(2.2, 0.05, 0.8);
+            const wingMat = new THREE.MeshStandardMaterial({ color: 0x0f0c1b, metalness: 0.9 });
+            const wings = new THREE.Mesh(wingGeo, wingMat);
+            wings.position.z = 0.3;
+            shipGroup.add(wings);
+
+            // Thruster Glow
+            const engineGeo = new THREE.CylinderGeometry(0.15, 0.15, 0.4, 16);
+            const engineMat = new THREE.MeshBasicMaterial({ color: colorHex });
+            const engine = new THREE.Mesh(engineGeo, engineMat);
+            engine.rotation.x = Math.PI / 2;
+            engine.position.z = 1.2;
+            shipGroup.add(engine);
+
+            shipGroup.scale.set(0.6, 0.6, 0.6);
+            return shipGroup;
+        }
+
+        const ship1 = createSpaceship(0xff0055); // Red engine thruster
+        const ship2 = createSpaceship(0x00d2ff); // Blue engine thruster
+
+        scene.add(ship1);
+        scene.add(ship2);
 
         camera.position.z = 18;
 
@@ -543,23 +614,34 @@
             requestAnimationFrame(animate);
             const time = clock.getElapsedTime();
 
-            galaxy.rotation.y = time * 0.05;
-            starField.rotation.y = time * 0.01;
+            // Rotate background galaxy & planets
+            galaxy.rotation.y = time * 0.04;
+            starField.rotation.y = time * 0.008;
 
-            coreMesh.rotation.x = time * 0.5;
-            coreMesh.rotation.y = time * 0.7;
+            planet1.rotation.y = time * 0.1;
+            planetGroup1.rotation.z = Math.sin(time * 0.2) * 0.08;
+            planet2.rotation.y = time * 0.15;
 
-            const pulse = Math.sin(time * 3) * 0.15 + 1;
-            coreMesh.scale.set(pulse, pulse, pulse);
+            // Spaceship 1 Path Flight (Orbital Patrol)
+            const radius1 = 12;
+            ship1.position.x = Math.cos(time * 0.4) * radius1 - 2;
+            ship1.position.y = Math.sin(time * 0.3) * 5 + 3;
+            ship1.position.z = Math.sin(time * 0.4) * radius1 - 4;
+            ship1.rotation.y = -time * 0.4 + Math.PI / 2;
+            ship1.rotation.z = Math.sin(time * 0.8) * 0.2;
 
-            ring1.rotation.y = time * 0.6;
-            ring1.rotation.z = time * 0.3;
+            // Spaceship 2 Path Flight (Cross Deep Space Traverse)
+            const radius2 = 15;
+            ship2.position.x = Math.sin(-time * 0.3) * radius2 + 3;
+            ship2.position.y = Math.cos(time * 0.25) * 6 - 2;
+            ship2.position.z = Math.cos(-time * 0.3) * radius2 - 6;
+            ship2.rotation.y = time * 0.3 - Math.PI / 2;
+            ship2.rotation.x = Math.cos(time * 0.5) * 0.15;
 
-            ring2.rotation.x = -time * 0.4;
-            ring2.rotation.y = time * 0.5;
-
-            mechaGroup.rotation.y += (mouseX * 0.6 - mechaGroup.rotation.y) * 0.05;
-            mechaGroup.rotation.x += (mouseY * 0.6 - mechaGroup.rotation.x) * 0.05;
+            // Subtle Parallax Camera Reaction
+            camera.position.x += (mouseX * 2.5 - camera.position.x) * 0.05;
+            camera.position.y += (-mouseY * 2.5 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
 
             renderer.render(scene, camera);
         }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistify | Cosmic Universe Void</title>
+    <title>Assistify | Emerald-Cyan Cosmic Void</title>
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,19 +12,17 @@
 
     <style>
         :root {
-            --bg-deep: #03010a;
+            --bg-deep: #02010a;
             --text-main: #f8fafc;
-            /* Universe Color Palette: Cosmic Purple, Nebula Magenta, Starlight Gold, Cosmic Cyan */
-            --accent-purple: #9d4edd;
-            --accent-magenta: #f72585;
-            --accent-gold: #ffb703;
-            --accent-cyan: #4cc9f0;
-            
+            /* Assistify Brand Color Palette (Neon Emerald & Cyber Cyan) */
+            --accent-emerald: #00ffaa;
+            --accent-cyan: #00f3ff;
+            --accent-violet: #8a2be2;
             /* 2% Opacity Background Palette */
-            --glass-card: rgba(15, 5, 30, 0.02); 
-            --glass-border: rgba(157, 78, 221, 0.35);
-            --btn-bg: rgba(20, 8, 40, 0.02);
-            --universe-gradient: linear-gradient(135deg, var(--accent-purple), var(--accent-magenta), var(--accent-gold));
+            --glass-card: rgba(4, 18, 12, 0.02); 
+            --glass-border: rgba(0, 255, 170, 0.35);
+            --btn-bg: rgba(6, 28, 20, 0.02);
+            --dual-gradient: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
         }
 
         * {
@@ -56,7 +54,7 @@
             pointer-events: none;
         }
 
-        /* 2% Opacity Cyber HUD Card Frame */
+        /* Cyber HUD Card Frame */
         .cyber-card {
             position: relative;
             z-index: 1;
@@ -70,8 +68,8 @@
             border: 1px solid var(--glass-border);
             border-radius: 24px;
             box-shadow: 
-                0 0 35px rgba(157, 78, 221, 0.25),
-                0 0 70px rgba(247, 37, 133, 0.18),
+                0 0 35px rgba(0, 255, 170, 0.2),
+                0 0 70px rgba(0, 243, 255, 0.15),
                 inset 0 0 15px rgba(255, 255, 255, 0.02);
             text-align: center;
             animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
@@ -87,13 +85,13 @@
         }
         .cyber-card::before {
             top: 12px; left: 12px;
-            border-top: 2px solid var(--accent-magenta);
-            border-left: 2px solid var(--accent-magenta);
+            border-top: 2px solid var(--accent-emerald);
+            border-left: 2px solid var(--accent-emerald);
         }
         .cyber-card::after {
             bottom: 12px; right: 12px;
-            border-bottom: 2px solid var(--accent-purple);
-            border-right: 2px solid var(--accent-purple);
+            border-bottom: 2px solid var(--accent-cyan);
+            border-right: 2px solid var(--accent-cyan);
         }
 
         @keyframes cardAppear {
@@ -101,27 +99,28 @@
             to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
-        /* Mech Avatar with Universe Nebula Rings */
+        /* Mech Avatar with Emerald & Cyan Energy Rings */
         .avatar-wrapper {
             position: relative;
             width: 128px;
             height: 128px;
             margin: 0 auto 22px;
+            perspective: 800px;
         }
 
-        .avatar-ring-purple {
+        .avatar-ring-emerald {
             position: absolute;
             top: -8px;
             left: -8px;
             width: 144px;
             height: 144px;
             border-radius: 50%;
-            border: 2px dashed var(--accent-purple);
+            border: 2px dashed var(--accent-emerald);
             animation: spinClockwise 16s linear infinite;
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.5);
+            box-shadow: 0 0 15px rgba(0, 255, 170, 0.4);
         }
 
-        .avatar-ring-gold {
+        .avatar-ring-cyan {
             position: absolute;
             top: -4px;
             left: -4px;
@@ -129,8 +128,8 @@
             height: 136px;
             border-radius: 50%;
             border: 2px solid transparent;
-            border-top-color: var(--accent-magenta);
-            border-bottom-color: var(--accent-gold);
+            border-top-color: var(--accent-cyan);
+            border-bottom-color: var(--accent-violet);
             animation: spinCounter 10s linear infinite;
         }
 
@@ -141,16 +140,44 @@
             100% { transform: rotate(-360deg); }
         }
 
-        .profile-pic {
+        /* Holographic Rotating Buddha Avatar Box */
+        .buddha-avatar-box {
             width: 100%;
             height: 100%;
             border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid var(--accent-magenta);
-            box-shadow: 0 0 25px rgba(247, 37, 133, 0.5);
+            background: rgba(2, 16, 12, 0.4);
+            border: 2px solid var(--accent-cyan);
+            box-shadow: 0 0 25px rgba(0, 243, 255, 0.4), inset 0 0 15px rgba(0, 255, 170, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            transform-style: preserve-3d;
         }
 
-        /* Header & Cosmic Branding */
+        .buddha-svg {
+            width: 76px;
+            height: 76px;
+            animation: floatRotateBuddha 7s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        @keyframes floatRotateBuddha {
+            0% {
+                transform: rotateY(0deg) scale(1);
+                filter: drop-shadow(0 0 8px var(--accent-emerald)) drop-shadow(0 0 16px var(--accent-cyan));
+            }
+            50% {
+                transform: rotateY(180deg) scale(0.92);
+                filter: drop-shadow(0 0 12px var(--accent-cyan)) drop-shadow(0 0 20px var(--accent-violet));
+            }
+            100% {
+                transform: rotateY(360deg) scale(1);
+                filter: drop-shadow(0 0 8px var(--accent-emerald)) drop-shadow(0 0 16px var(--accent-cyan));
+            }
+        }
+
+        /* Header & Neon Branding */
         .brand-header {
             display: flex;
             align-items: center;
@@ -161,31 +188,31 @@
 
         .robot-icon {
             font-size: 28px;
-            background: var(--universe-gradient);
+            background: var(--dual-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 12px var(--accent-magenta));
+            filter: drop-shadow(0 0 12px var(--accent-emerald));
         }
 
         h1 {
             font-size: 32px;
             font-weight: 900;
             letter-spacing: 2.5px;
-            background: linear-gradient(135deg, #ffffff 0%, var(--accent-purple) 35%, var(--accent-magenta) 70%, var(--accent-gold) 100%);
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent-emerald) 50%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-transform: uppercase;
-            filter: drop-shadow(0 0 10px rgba(157, 78, 221, 0.4));
+            filter: drop-shadow(0 0 8px rgba(0, 255, 170, 0.3));
         }
 
         .subtitle {
             font-size: 12px;
-            color: var(--accent-gold);
+            color: var(--accent-emerald);
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 12px;
             font-weight: 700;
-            text-shadow: 0 0 10px rgba(255, 183, 3, 0.8);
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.8);
         }
 
         .bio {
@@ -196,7 +223,7 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
         }
 
-        /* Social Icons (2% Opacity) */
+        /* Social Icons */
         .social-grid {
             display: flex;
             justify-content: center;
@@ -208,8 +235,8 @@
             width: 48px;
             height: 48px;
             border-radius: 12px;
-            background: rgba(20, 8, 40, 0.02);
-            border: 1px solid rgba(157, 78, 221, 0.35);
+            background: rgba(6, 28, 20, 0.02);
+            border: 1px solid rgba(0, 255, 170, 0.3);
             color: var(--text-main);
             display: flex;
             align-items: center;
@@ -221,13 +248,13 @@
 
         .social-link:hover {
             color: #ffffff;
-            border-color: var(--accent-magenta);
+            border-color: var(--accent-emerald);
             transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 5px 25px rgba(247, 37, 133, 0.5);
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.35), rgba(247, 37, 133, 0.35));
+            box-shadow: 0 5px 25px rgba(0, 255, 170, 0.5);
+            background: linear-gradient(135deg, rgba(0, 255, 170, 0.3), rgba(0, 243, 255, 0.3));
         }
 
-        /* 2% Opacity Link Buttons */
+        /* Link Buttons */
         .links-wrapper {
             display: flex;
             flex-direction: column;
@@ -248,7 +275,7 @@
             border-radius: 14px;
             font-weight: 700;
             font-size: 15px;
-            border: 1px solid rgba(157, 78, 221, 0.28);
+            border: 1px solid rgba(0, 243, 255, 0.25);
             transition: all 0.3s ease;
             overflow: hidden;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95);
@@ -261,29 +288,29 @@
             top: 0;
             width: 4px;
             height: 100%;
-            background: var(--accent-purple);
+            background: var(--accent-emerald);
             transition: all 0.3s ease;
         }
 
         .mecha-btn:hover {
-            border-color: var(--accent-magenta);
+            border-color: var(--accent-emerald);
             transform: translateX(4px) translateY(-2px);
-            box-shadow: 0 8px 30px rgba(247, 37, 133, 0.35);
-            background: rgba(157, 78, 221, 0.15);
+            box-shadow: 0 8px 30px rgba(0, 255, 170, 0.35);
+            background: rgba(0, 255, 170, 0.15);
         }
 
         .mecha-btn:hover::before {
             width: 100%;
-            background: var(--universe-gradient);
-            opacity: 0.18;
+            background: var(--dual-gradient);
+            opacity: 0.15;
         }
 
         .btn-tag {
             font-size: 10px;
             padding: 4px 8px;
-            background: rgba(157, 78, 221, 0.18);
-            border: 1px solid var(--accent-purple);
-            color: #d8b4fe;
+            background: rgba(0, 255, 170, 0.15);
+            border: 1px solid var(--accent-emerald);
+            color: var(--accent-emerald);
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -291,18 +318,18 @@
         }
 
         .mecha-btn:hover .btn-tag {
-            background: rgba(247, 37, 133, 0.25);
-            border-color: var(--accent-magenta);
-            color: #ff85c0;
+            background: rgba(0, 243, 255, 0.25);
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
         }
 
-        /* 2% Opacity Contact Box */
+        /* Contact Box */
         .contact-box {
-            background: rgba(15, 5, 30, 0.02);
+            background: rgba(4, 18, 12, 0.02);
             backdrop-filter: blur(1px);
             padding: 22px 18px;
             border-radius: 16px;
-            border: 1px solid rgba(157, 78, 221, 0.25);
+            border: 1px solid rgba(0, 255, 170, 0.25);
             text-align: left;
             position: relative;
         }
@@ -312,12 +339,12 @@
             text-transform: uppercase;
             letter-spacing: 1.5px;
             margin-bottom: 14px;
-            color: var(--accent-magenta);
+            color: var(--accent-emerald);
             display: flex;
             align-items: center;
             gap: 8px;
             font-weight: 800;
-            text-shadow: 0 0 8px rgba(247, 37, 133, 0.5);
+            text-shadow: 0 0 8px rgba(0, 255, 170, 0.5);
         }
 
         .input-field {
@@ -338,9 +365,9 @@
 
         .input-field:focus {
             outline: none;
-            border-color: var(--accent-purple);
+            border-color: var(--accent-cyan);
             background: rgba(0, 0, 0, 0.5);
-            box-shadow: 0 0 12px rgba(157, 78, 221, 0.4);
+            box-shadow: 0 0 12px rgba(0, 243, 255, 0.4);
         }
 
         textarea.input-field {
@@ -351,8 +378,8 @@
         .submit-btn {
             width: 100%;
             padding: 14px;
-            background: var(--universe-gradient);
-            color: #ffffff;
+            background: var(--dual-gradient);
+            color: #02010a;
             border: none;
             border-radius: 10px;
             font-weight: 900;
@@ -361,13 +388,13 @@
             letter-spacing: 1.5px;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(157, 78, 221, 0.4);
+            box-shadow: 0 4px 20px rgba(0, 255, 170, 0.4);
         }
 
         .submit-btn:hover {
-            box-shadow: 0 6px 25px rgba(247, 37, 133, 0.6);
+            box-shadow: 0 6px 25px rgba(0, 243, 255, 0.6);
             transform: translateY(-2px);
-            filter: brightness(1.2);
+            filter: brightness(1.15);
         }
     </style>
 </head>
@@ -379,11 +406,40 @@
     <!-- Main Content Card -->
     <div class="cyber-card">
         
-        <!-- Profile Pic with Universe Rings -->
+        <!-- Rotating Holographic Buddha Avatar surrounded by Emerald & Cyan Rings -->
         <div class="avatar-wrapper">
-            <div class="avatar-ring-purple"></div>
-            <div class="avatar-ring-gold"></div>
-            <img src=">
+            <div class="avatar-ring-emerald"></div>
+            <div class="avatar-ring-cyan"></div>
+            <div class="buddha-avatar-box">
+                <svg class="buddha-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="buddhaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#00ffaa" />
+                            <stop offset="50%" stop-color="#00f3ff" />
+                            <stop offset="100%" stop-color="#8a2be2" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Floating Cosmic Halo -->
+                    <circle cx="50" cy="30" r="17" fill="none" stroke="url(#buddhaGradient)" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.7"/>
+                    
+                    <!-- Meditating Buddha Holographic Linework -->
+                    <g fill="url(#buddhaGradient)">
+                        <!-- Ushnisha (Topknot) -->
+                        <circle cx="50" cy="14" r="3.5" />
+                        <!-- Head -->
+                        <path d="M50,17 C43,17 42,22 42,28 C42,34 45,38 50,38 C55,38 58,34 58,28 C58,22 57,17 50,17 Z" />
+                        <path d="M41,25 C39.5,25 39,28 41,31 M59,25 C60.5,25 61,28 59,31" stroke="url(#buddhaGradient)" stroke-width="1.5" fill="none"/>
+                        <!-- Neck & Shoulders -->
+                        <path d="M46,38 L54,38 L57,44 L43,44 Z" />
+                        <!-- Torso & Draped Robe -->
+                        <path d="M43,44 C36,46 28,52 25,60 C23,65 22,72 22,76 C22,78 24,79 28,79 C34,79 40,75 50,75 C60,75 66,79 72,79 C76,79 78,78 78,76 C78,72 77,65 75,60 C72,52 64,46 57,44 Z" />
+                        <!-- Meditating Lotus Base & Hands -->
+                        <path d="M36,66 C42,63 58,63 64,66 C68,68 72,73 70,75 C65,77 58,70 50,70 C42,70 35,77 30,75 C28,73 32,68 36,66 Z" fill-opacity="0.9"/>
+                        <!-- Lotus Pedestal Base -->
+                        <path d="M26,81 C34,85 66,85 74,81 C66,88 34,88 26,81 Z" opacity="0.75"/>
+                    </g>
+                </svg>
+            </div>
         </div>
         
         <!-- Header & Branding -->
@@ -391,7 +447,7 @@
             <i class="fa-solid fa-robot robot-icon"></i>
             <h1>ASSISTIFY</h1>
         </div>
-        <div class="subtitle">Cosmic Nebula Void</div>
+        <div class="subtitle">Emerald-Cyan Cosmic Void</div>
         <p class="bio">Exploring Multiverse Storytelling, Sci-Fi Visuals & Mecha Universes</p>
         
         <!-- Social Links -->
@@ -442,38 +498,33 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // 1. Cosmic Universe Lighting Setup (Magenta, Purple, Gold Highlights)
-        const ambientLight = new THREE.AmbientLight(0x200b3b, 1.2);
+        // 1. Cosmic Lighting Setup (Emerald & Cyan Highlights)
+        const ambientLight = new THREE.AmbientLight(0x112233, 1.2);
         scene.add(ambientLight);
 
-        const magentaLight = new THREE.PointLight(0xf72585, 4, 80);
-        magentaLight.position.set(-20, 15, 10);
-        scene.add(magentaLight);
+        const emeraldLight = new THREE.PointLight(0x00ffaa, 4, 80);
+        emeraldLight.position.set(-20, 15, 10);
+        scene.add(emeraldLight);
 
-        const purpleLight = new THREE.PointLight(0x9d4edd, 4, 80);
-        purpleLight.position.set(20, -15, 10);
-        scene.add(purpleLight);
+        const cyanLight = new THREE.PointLight(0x00f3ff, 4, 80);
+        cyanLight.position.set(20, -15, 10);
+        scene.add(cyanLight);
 
-        const goldLight = new THREE.PointLight(0xffb703, 2, 60);
-        goldLight.position.set(0, 20, -10);
-        scene.add(goldLight);
-
-        // 2. Cosmic Universe Galaxy (Purple, Magenta, Gold & Cyan Particle Palette)
-        const galaxyParticleCount = 3000;
+        // 2. Cosmic Spiral Galaxy (Emerald & Cyan Palette)
+        const galaxyParticleCount = 2800;
         const galaxyGeo = new THREE.BufferGeometry();
         const galaxyPositions = new Float32Array(galaxyParticleCount * 3);
         const galaxyColors = new Float32Array(galaxyParticleCount * 3);
 
-        const colorPurple = new THREE.Color(0x9d4edd);
-        const colorMagenta = new THREE.Color(0xf72585);
-        const colorGold = new THREE.Color(0xffb703);
-        const colorCyan = new THREE.Color(0x4cc9f0);
+        const colorEmerald = new THREE.Color(0x00ffaa);
+        const colorCyan = new THREE.Color(0x00f3ff);
+        const colorViolet = new THREE.Color(0x8a2be2);
 
         for (let i = 0; i < galaxyParticleCount; i++) {
             const i3 = i * 3;
             const radius = Math.random() * 32 + 2;
             const spinAngle = radius * 0.4;
-            const branchAngle = ((i % 3) * (Math.PI * 2 / 3)); 
+            const branchAngle = ((i % 2) * Math.PI); 
 
             const randomX = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 3;
             const randomY = (Math.pow(Math.random(), 3) * (Math.random() < 0.5 ? 1 : -1)) * 3;
@@ -483,14 +534,11 @@
             galaxyPositions[i3 + 1] = randomY;
             galaxyPositions[i3 + 2] = Math.sin(spinAngle + branchAngle) * radius + randomZ;
 
-            let mixedColor;
-            const mod = i % 3;
-            if (mod === 0) {
-                mixedColor = colorPurple.clone().lerp(colorMagenta, radius / 32);
-            } else if (mod === 1) {
-                mixedColor = colorMagenta.clone().lerp(colorGold, Math.random());
+            let mixedColor = colorEmerald.clone();
+            if (i % 2 === 0) {
+                mixedColor.lerp(colorCyan, radius / 32);
             } else {
-                mixedColor = colorPurple.clone().lerp(colorCyan, radius / 32);
+                mixedColor.lerp(colorViolet, Math.random());
             }
 
             galaxyColors[i3] = mixedColor.r;
@@ -515,38 +563,38 @@
         scene.add(galaxy);
 
         // 3. Deep Space Stars Background
-        const starCount = 1200;
+        const starCount = 1000;
         const starGeo = new THREE.BufferGeometry();
         const starPos = new Float32Array(starCount * 3);
 
         for (let i = 0; i < starCount * 3; i += 3) {
-            starPos[i] = (Math.random() - 0.5) * 95;
-            starPos[i + 1] = (Math.random() - 0.5) * 95;
-            starPos[i + 2] = (Math.random() - 0.5) * 95;
+            starPos[i] = (Math.random() - 0.5) * 90;
+            starPos[i + 1] = (Math.random() - 0.5) * 90;
+            starPos[i + 2] = (Math.random() - 0.5) * 90;
         }
 
         starGeo.setAttribute('position', new THREE.BufferAttribute(starPos, 3));
-        const starMat = new THREE.PointsMaterial({ size: 0.08, color: 0xffffff, transparent: true, opacity: 0.75 });
+        const starMat = new THREE.PointsMaterial({ size: 0.08, color: 0xffffff, transparent: true, opacity: 0.7 });
         const starField = new THREE.Points(starGeo, starMat);
         scene.add(starField);
 
         // 4. PLANETS CREATION
-        // Planet 1: Ringed Cosmic Gas Giant
+        // Planet 1: Ringed Gas Giant
         const planetGroup1 = new THREE.Group();
         const planetGeo1 = new THREE.SphereGeometry(3.2, 64, 64);
         const planetMat1 = new THREE.MeshPhongMaterial({
-            color: 0x1d032b,
-            emissive: 0x2e003e,
-            specular: 0xf72585,
+            color: 0x051a14,
+            emissive: 0x003322,
+            specular: 0x00f3ff,
             shininess: 30
         });
         const planet1 = new THREE.Mesh(planetGeo1, planetMat1);
         planetGroup1.add(planet1);
 
-        // Planet 1 Celestial Ring
+        // Planet 1 Orbital Ring
         const ringGeo = new THREE.RingGeometry(4.2, 6.5, 64);
         const ringMat = new THREE.MeshStandardMaterial({
-            color: 0xffb703,
+            color: 0x00ffaa,
             side: THREE.DoubleSide,
             transparent: true,
             opacity: 0.65,
@@ -559,13 +607,13 @@
         planetGroup1.position.set(9, -2, -8);
         scene.add(planetGroup1);
 
-        // Planet 2: Small Deep Purple Moon
+        // Planet 2: Small Ice Moon
         const planetGeo2 = new THREE.SphereGeometry(1.4, 32, 32);
         const planetMat2 = new THREE.MeshPhongMaterial({
-            color: 0x0a0118,
-            emissive: 0x1a0033,
-            specular: 0x9d4edd,
-            shininess: 20
+            color: 0x002244,
+            emissive: 0x001122,
+            specular: 0x00ffaa,
+            shininess: 15
         });
         const planet2 = new THREE.Mesh(planetGeo2, planetMat2);
         planet2.position.set(-10, 6, -10);
@@ -577,19 +625,19 @@
 
             // Cockpit / Fuselage
             const bodyGeo = new THREE.ConeGeometry(0.4, 2.0, 5);
-            const bodyMat = new THREE.MeshStandardMaterial({ color: 0x1c0d2e, roughness: 0.2, metalness: 0.8 });
+            const bodyMat = new THREE.MeshStandardMaterial({ color: 0x0d1f1a, roughness: 0.2, metalness: 0.8 });
             const body = new THREE.Mesh(bodyGeo, bodyMat);
             body.rotation.x = Math.PI / 2;
             shipGroup.add(body);
 
             // Wing Structure
             const wingGeo = new THREE.BoxGeometry(2.0, 0.04, 0.7);
-            const wingMat = new THREE.MeshStandardMaterial({ color: 0x10051e, metalness: 0.9 });
+            const wingMat = new THREE.MeshStandardMaterial({ color: 0x051410, metalness: 0.9 });
             const wings = new THREE.Mesh(wingGeo, wingMat);
             wings.position.z = 0.2;
             shipGroup.add(wings);
 
-            // Tiny Engine Glow
+            // Engine Glow
             const engineGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.4, 12);
             const engineMat = new THREE.MeshBasicMaterial({ color: engineColorHex });
             const engine = new THREE.Mesh(engineGeo, engineMat);
@@ -597,14 +645,14 @@
             engine.position.z = 1.1;
             shipGroup.add(engine);
 
-            // Micro scale (Tiny Ships)
+            // Micro scale
             shipGroup.scale.set(0.18, 0.18, 0.18);
             return shipGroup;
         }
 
-        // Squad of 7 tiny spaceships with universe engine glow colors
+        // Generate squad of 7 tiny spaceships
         const tinyShips = [];
-        const engineColors = [0x9d4edd, 0xf72585, 0xffb703, 0x4cc9f0, 0x7209b7];
+        const engineColors = [0x00ffaa, 0x00f3ff, 0x8a2be2, 0xffaa00, 0x00ffcc];
 
         for (let i = 0; i < 7; i++) {
             const color = engineColors[i % engineColors.length];
@@ -657,12 +705,11 @@
                 item.mesh.position.y = Math.cos(t * 1.3) * item.radiusY + item.heightOffset;
                 item.mesh.position.z = Math.cos(t * sign) * item.radiusZ - 4;
 
-                // Pitch & Yaw Rotations along vector
                 item.mesh.rotation.y = -t * sign + (sign > 0 ? Math.PI / 2 : -Math.PI / 2);
                 item.mesh.rotation.z = Math.sin(t * 2) * 0.2;
             });
 
-            // Subtle Parallax Camera Reaction
+            // Parallax Camera Reaction
             camera.position.x += (mouseX * 2.5 - camera.position.x) * 0.05;
             camera.position.y += (-mouseY * 2.5 - camera.position.y) * 0.05;
             camera.lookAt(scene.position);

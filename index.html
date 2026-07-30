@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Assistify | Emerald-Cyan Cosmic Void</title>
+    <title>ASSISTIFY | Sci-Fi Storytelling & AI Visuals</title>
     
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Three.js Library -->
+    <!-- Three.js Library for 3D Background -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
         :root {
             --bg-deep: #02010a;
             --text-main: #f8fafc;
+            --text-muted: #94a3b8;
             --accent-emerald: #00ffaa;
             --accent-cyan: #00f3ff;
             --accent-violet: #8a2be2;
-            --glass-card: rgba(4, 18, 12, 0.02); 
-            --glass-border: rgba(0, 255, 170, 0.35);
-            --btn-bg: rgba(6, 28, 20, 0.02);
+            --glass-bg: rgba(6, 20, 15, 0.45);
+            --glass-border: rgba(0, 255, 170, 0.25);
             --dual-gradient: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
         }
 
@@ -29,19 +29,20 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background-color: var(--bg-deep);
             color: var(--text-main);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* 3D Background Canvas Layer */
+        /* Fixed 3D Canvas Background */
         #webgl-canvas {
             position: fixed;
             top: 0;
@@ -52,342 +53,510 @@
             pointer-events: none;
         }
 
-        /* Cyber HUD Card Frame */
-        .cyber-card {
+        /* Content Container Wrapper */
+        .site-content {
             position: relative;
             z-index: 1;
-            width: 90%;
-            max-width: 460px;
-            margin: 40px auto;
-            padding: 42px 26px;
-            background: var(--glass-card);
-            backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 
-                0 0 35px rgba(0, 255, 170, 0.2),
-                0 0 70px rgba(0, 243, 255, 0.15),
-                inset 0 0 15px rgba(255, 255, 255, 0.02);
+        }
+
+        /* 1. Sticky Navigation Bar */
+        .navbar {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(2, 1, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 16px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 99;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .nav-brand i {
+            color: var(--accent-emerald);
+            filter: drop-shadow(0 0 8px var(--accent-emerald));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);
+        }
+
+        /* 2. Hero Section */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
-            animation: cardAppear 1s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 60px 20px;
         }
 
-        .cyber-card::before, .cyber-card::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            pointer-events: none;
-        }
-        .cyber-card::before {
-            top: 12px; left: 12px;
-            border-top: 2px solid var(--accent-emerald);
-            border-left: 2px solid var(--accent-emerald);
-        }
-        .cyber-card::after {
-            bottom: 12px; right: 12px;
-            border-bottom: 2px solid var(--accent-cyan);
-            border-right: 2px solid var(--accent-cyan);
-        }
-
-        @keyframes cardAppear {
-            from { opacity: 0; transform: translateY(40px) scale(0.92); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* Mech Avatar Rings */
-        .avatar-wrapper {
-            position: relative;
-            width: 128px;
-            height: 128px;
-            margin: 0 auto 22px;
-            perspective: 800px;
-        }
-
-        .avatar-ring-emerald {
-            position: absolute;
-            top: -8px; left: -8px;
-            width: 144px; height: 144px;
-            border-radius: 50%;
-            border: 2px dashed var(--accent-emerald);
-            animation: spinClockwise 16s linear infinite;
-            box-shadow: 0 0 15px rgba(0, 255, 170, 0.4);
-        }
-
-        .avatar-ring-cyan {
-            position: absolute;
-            top: -4px; left: -4px;
-            width: 136px; height: 136px;
-            border-radius: 50%;
-            border: 2px solid transparent;
-            border-top-color: var(--accent-cyan);
-            border-bottom-color: var(--accent-violet);
-            animation: spinCounter 10s linear infinite;
-        }
-
-        @keyframes spinClockwise { 100% { transform: rotate(360deg); } }
-        @keyframes spinCounter { 100% { transform: rotate(-360deg); } }
-
-        .buddha-avatar-box {
-            width: 100%; height: 100%;
-            border-radius: 50%;
-            background: rgba(2, 16, 12, 0.4);
-            border: 2px solid var(--accent-cyan);
-            box-shadow: 0 0 25px rgba(0, 243, 255, 0.4), inset 0 0 15px rgba(0, 255, 170, 0.25);
-            display: flex; align-items: center; justify-content: center;
-            overflow: hidden;
-            transform-style: preserve-3d;
-        }
-
-        .buddha-svg {
-            width: 76px; height: 76px;
-            animation: floatRotateBuddha 7s ease-in-out infinite;
-            transform-style: preserve-3d;
-        }
-
-        @keyframes floatRotateBuddha {
-            0% { transform: rotateY(0deg) scale(1); filter: drop-shadow(0 0 8px var(--accent-emerald)); }
-            50% { transform: rotateY(180deg) scale(0.92); filter: drop-shadow(0 0 12px var(--accent-cyan)); }
-            100% { transform: rotateY(360deg) scale(1); filter: drop-shadow(0 0 8px var(--accent-emerald)); }
-        }
-
-        /* Branding Headers */
-        .brand-header {
-            display: flex; align-items: center; justify-content: center;
-            gap: 12px; margin-bottom: 6px;
-        }
-
-        .robot-icon {
-            font-size: 28px;
-            background: var(--dual-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 12px var(--accent-emerald));
-        }
-
-        h1 {
-            font-size: 32px; font-weight: 900; letter-spacing: 2.5px;
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 4px;
             background: linear-gradient(135deg, #ffffff 0%, var(--accent-emerald) 50%, var(--accent-cyan) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 0 15px rgba(0, 255, 170, 0.25));
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            color: var(--accent-emerald);
             text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            text-shadow: 0 0 10px rgba(0, 255, 170, 0.6);
         }
 
-        .subtitle {
-            font-size: 12px; color: var(--accent-emerald);
-            text-transform: uppercase; letter-spacing: 3px;
-            margin-bottom: 16px; font-weight: 700;
-            text-shadow: 0 0 10px rgba(0, 255, 170, 0.8);
+        .hero-description {
+            max-width: 650px;
+            font-size: 16px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 36px;
         }
 
-        .bio {
-            font-size: 14px; color: #cbd5e1; margin-bottom: 26px;
-            line-height: 1.5; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
-        /* Social Grid */
-        .social-grid {
-            display: flex; justify-content: center; gap: 16px; margin-bottom: 30px;
+        .btn-primary {
+            padding: 14px 32px;
+            background: var(--dual-gradient);
+            color: #02010a;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 255, 170, 0.4);
         }
 
-        .social-link {
-            width: 48px; height: 48px; border-radius: 12px;
-            background: rgba(6, 28, 20, 0.02);
-            border: 1px solid rgba(0, 255, 170, 0.3);
-            color: var(--text-main); display: flex; align-items: center; justify-content: center;
-            font-size: 20px; text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.6);
         }
 
-        .social-link:hover {
-            color: #ffffff; border-color: var(--accent-emerald);
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 5px 25px rgba(0, 255, 170, 0.5);
-            background: linear-gradient(135deg, rgba(0, 255, 170, 0.3), rgba(0, 243, 255, 0.3));
+        .btn-secondary {
+            padding: 14px 32px;
+            background: transparent;
+            color: var(--accent-cyan);
+            border: 1px solid var(--accent-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
         }
 
-        /* Action Buttons */
-        .links-wrapper { display: flex; flex-direction: column; gap: 14px; margin-bottom: 32px; }
-
-        .mecha-btn {
-            position: relative; display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 20px; background: var(--btn-bg); backdrop-filter: blur(1px);
-            color: var(--text-main); text-decoration: none; border-radius: 14px;
-            font-weight: 700; font-size: 15px; border: 1px solid rgba(0, 243, 255, 0.25);
-            transition: all 0.3s ease; cursor: pointer;
+        .btn-secondary:hover {
+            background: rgba(0, 243, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+            transform: translateY(-3px);
         }
 
-        .mecha-btn::before {
-            content: ''; position: absolute; left: 0; top: 0; width: 4px; height: 100%;
-            background: var(--accent-emerald); transition: all 0.3s ease;
+        /* General Section Layout */
+        .section {
+            padding: 80px 8%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .mecha-btn:hover {
-            border-color: var(--accent-emerald); transform: translateX(4px) translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 255, 170, 0.35); background: rgba(0, 255, 170, 0.15);
+        .section-header {
+            text-align: center;
+            margin-bottom: 48px;
         }
 
-        .btn-tag {
-            font-size: 10px; padding: 4px 8px; background: rgba(0, 255, 170, 0.15);
-            border: 1px solid var(--accent-emerald); color: var(--accent-emerald);
-            border-radius: 6px; text-transform: uppercase; letter-spacing: 1px;
+        .section-title {
+            font-size: 28px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-emerald);
+            display: inline-block;
+            position: relative;
         }
 
-        /* Contact Section */
-        .contact-box {
-            background: rgba(4, 18, 12, 0.02); backdrop-filter: blur(1px);
-            padding: 22px 18px; border-radius: 16px; border: 1px solid rgba(0, 255, 170, 0.25);
-            text-align: left;
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50%;
+            height: 2px;
+            background: var(--accent-cyan);
+            margin: 8px auto 0;
+            box-shadow: 0 0 8px var(--accent-cyan);
         }
 
-        .contact-title {
-            font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px;
-            margin-bottom: 14px; color: var(--accent-emerald); display: flex; align-items: center;
-            gap: 8px; font-weight: 800;
+        /* 3. Narrative Story Section */
+        .story-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 40px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .story-text h3 {
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+
+        .story-text p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .story-preview {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            height: 260px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 12px;
+            color: var(--accent-cyan);
+        }
+
+        /* 4. Showcase & Video Grid */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .media-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .media-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--accent-emerald);
+            box-shadow: 0 8px 30px rgba(0, 255, 170, 0.25);
+        }
+
+        .media-thumb {
+            width: 100%;
+            height: 180px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .media-info {
+            padding: 20px;
+        }
+
+        .media-info h4 {
+            color: #fff;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .media-info p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* 5. Transmission / Contact Section */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 36px;
+            backdrop-filter: blur(8px);
         }
 
         .input-field {
-            width: 100%; padding: 12px 14px; background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px;
-            color: #fff; font-size: 13px; margin-bottom: 12px;
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 16px;
         }
 
-        .submit-btn {
-            width: 100%; padding: 14px; background: var(--dual-gradient);
-            color: #02010a; border: none; border-radius: 10px; font-weight: 900;
-            font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; cursor: pointer;
+        .input-field:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
         }
 
-        /* Interactive Modals */
-        .modal {
-            display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%;
-            background: rgba(2, 1, 10, 0.85); backdrop-filter: blur(8px);
-            align-items: center; justify-content: center;
+        /* 6. Website Footer */
+        .footer {
+            border-top: 1px solid var(--glass-border);
+            background: rgba(2, 1, 10, 0.95);
+            padding: 40px 8%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
 
-        .modal-content {
-            background: #04120c; border: 1px solid var(--accent-cyan); border-radius: 16px;
-            width: 90%; max-width: 600px; padding: 24px; color: #fff; position: relative;
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+        .social-row {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
         }
 
-        .close-btn {
-            position: absolute; right: 16px; top: 12px; font-size: 24px; color: var(--accent-emerald);
-            cursor: pointer;
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            border-color: var(--accent-emerald);
+            color: var(--accent-emerald);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .story-card {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none; /* Can be expanded to mobile menu */
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- 3D Background Canvas -->
     <canvas id="webgl-canvas"></canvas>
 
-    <div class="cyber-card">
-        <div class="avatar-wrapper">
-            <div class="avatar-ring-emerald"></div>
-            <div class="avatar-ring-cyan"></div>
-            <div class="buddha-avatar-box">
-                <svg class="buddha-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="buddhaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" stop-color="#00ffaa" />
-                            <stop offset="50%" stop-color="#00f3ff" />
-                            <stop offset="100%" stop-color="#8a2be2" />
-                        </linearGradient>
-                    </defs>
-                    <circle cx="50" cy="30" r="17" fill="none" stroke="url(#buddhaGradient)" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.7"/>
-                    <g fill="url(#buddhaGradient)">
-                        <circle cx="50" cy="14" r="3.5" />
-                        <path d="M50,17 C43,17 42,22 42,28 C42,34 45,38 50,38 C55,38 58,34 58,28 C58,22 57,17 50,17 Z" />
-                        <path d="M46,38 L54,38 L57,44 L43,44 Z" />
-                        <path d="M43,44 C36,46 28,52 25,60 C23,65 22,72 22,76 C22,78 24,79 28,79 C34,79 40,75 50,75 C60,75 66,79 72,79 C76,79 78,78 78,76 C78,72 77,65 75,60 C72,52 64,46 57,44 Z" />
-                    </g>
-                </svg>
-            </div>
-        </div>
+    <div class="site-content">
         
-        <div class="brand-header">
-            <i class="fa-solid fa-robot robot-icon"></i>
-            <h1>ASSISTIFY</h1>
-        </div>
-        <div class="subtitle">Emerald-Cyan Cosmic Void</div>
-        <p class="bio">Exploring Multiverse Storytelling, Sci-Fi Visuals & Mecha Universes</p>
-        
-        <div class="social-grid">
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-x-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-tiktok"></i></a>
-        </div>
+        <!-- Sticky Navigation -->
+        <header class="navbar">
+            <a href="#" class="nav-brand">
+                <i class="fa-solid fa-robot"></i> ASSISTIFY
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">Story</a></li>
+                <li><a href="#videos">Cinematics</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </header>
 
-        <div class="links-wrapper">
-            <div class="mecha-btn" onclick="openModal('watchModal')">
-                <span>🎬 Latest Sci-Fi Cinematic</span>
-                <span class="btn-tag">Watch</span>
+        <!-- Hero Banner Section -->
+        <section class="hero">
+            <div class="hero-subtitle">Emerald-Cyan Cosmic Void</div>
+            <h1 class="hero-title">Multiverse Storytelling & AI Visuals</h1>
+            <p class="hero-description">
+                Building cinematic narratives, high-resolution mecha universes, and dramatic sci-fi storytelling through cutting-edge visual design.
+            </p>
+            <div class="hero-cta">
+                <a href="#videos" class="btn-primary">Watch Cinematics</a>
+                <a href="#about" class="btn-secondary">Read Narrative</a>
             </div>
-            <div class="mecha-btn" onclick="openModal('storyModal')">
-                <span>📖 "Rain Between Us" Story</span>
-                <span class="btn-tag">Read</span>
-            </div>
-            <div class="mecha-btn" onclick="openModal('galleryModal')">
-                <span>🤖 Deep Space Gallery</span>
-                <span class="btn-tag">Explore</span>
-            </div>
-        </div>
+        </section>
 
-        <div class="contact-box">
-            <div class="contact-title"><i class="fa-solid fa-satellite-dish"></i> Cosmic Transmission</div>
-            <form onsubmit="alert('Transmission Sent!'); return false;">
-                <input type="text" class="input-field" placeholder="Commander / Name" required>
-                <input type="email" class="input-field" placeholder="Sub-space Email" required>
-                <textarea class="input-field" placeholder="Transmit inquiry..." required></textarea>
-                <button type="submit" class="submit-btn">Send Signal</button>
-            </form>
-        </div>
+        <!-- About / Narrative Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Featured Narrative</h2>
+            </div>
+            <div class="story-card">
+                <div class="story-text">
+                    <h3>Rain Between Us</h3>
+                    <p>
+                        A three-part romantic sci-fi saga set against glowing neon cityscapes, heavy downpours, and high-stakes street velocity. 
+                    </p>
+                    <p>
+                        Following two souls bound by destiny as they navigate farewells across multi-dimensional horizons.
+                    </p>
+                    <a href="#contact" class="btn-secondary" style="margin-top: 12px; display: inline-block;">Request Script</a>
+                </div>
+                <div class="story-preview">
+                    <i class="fa-solid fa-clapperboard" style="font-size: 48px;"></i>
+                    <span>Cinematic Scene Concept</span>
+                </div>
+            </div>
+        </section>
 
-        <!-- CREATOR TAG (White & Blue Styling) -->
-        <div class="creator-tag" style="margin-top: 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; color: #ffffff;">
-            <span style="color: #ffffff;">Designed by</span> <span style="color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);">Goldy Mehra fx</span>
-        </div>
+        <!-- Video & Visual Showcase -->
+        <section id="videos" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Sci-Fi Video Showcase</h2>
+            </div>
+            <div class="grid-3">
+                <div class="media-card">
+                    <div class="media-thumb">
+                        <i class="fa-solid fa-play" style="font-size: 36px; color: var(--accent-emerald);"></i>
+                    </div>
+                    <div class="media-info">
+                        <h4>Chapter 1: Midnight Run</h4>
+                        <p>High-speed street racing visual rendering beneath cybernetic streetlights.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-thumb">
+                        <i class="fa-solid fa-play" style="font-size: 36px; color: var(--accent-cyan);"></i>
+                    </div>
+                    <div class="media-info">
+                        <h4>Chapter 2: Neon Reflection</h4>
+                        <p>Dramatic emotional dialogue sequence scripted under atmospheric rainfall.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-thumb">
+                        <i class="fa-solid fa-play" style="font-size: 36px; color: var(--accent-violet);"></i>
+                    </div>
+                    <div class="media-info">
+                        <h4>Chapter 3: Cosmos Departure</h4>
+                        <p>Interstellar departure featuring cinematic mech suits and orbital flight paths.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Art Gallery -->
+        <section id="gallery" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Visual Archives</h2>
+            </div>
+            <div class="grid-3">
+                <div class="media-card">
+                    <div class="media-thumb" style="background: rgba(0, 255, 170, 0.05);">
+                        <i class="fa-solid fa-image" style="font-size: 36px; color: var(--accent-emerald);"></i>
+                    </div>
+                    <div class="media-info">
+                        <h4>Mecha Core Persona</h4>
+                        <p>Detailed character render in full tactical armor.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-thumb" style="background: rgba(0, 243, 255, 0.05);">
+                        <i class="fa-solid fa-image" style="font-size: 36px; color: var(--accent-cyan);"></i>
+                    </div>
+                    <div class="media-info">
+                        <h4>Cosmopolis Void</h4>
+                        <p>Environment concept design with emerald energy grids.</p>
+                    </div>
+                </div>
+                <div class="media-card">
+                    <div class="media-thumb" style="background: rgba(138, 43, 226, 0.05);">
+                        <i class="fa-solid fa-image" style="font-size: 36px; color: var(--accent-violet);"></i>
+                    </div>
+                    <div class="media-info">
+                        <h4>Orbital Fleet</h4>
+                        <p>Deep space ship swarm entering sub-space travel.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-header">
+                <h2 class="section-title">Cosmic Transmission</h2>
+            </div>
+            <div class="contact-container">
+                <form onsubmit="alert('Signal transmitted successfully!'); return false;">
+                    <input type="text" class="input-field" placeholder="Your Name / Title" required>
+                    <input type="email" class="input-field" placeholder="Sub-Space Email Address" required>
+                    <textarea class="input-field" rows="4" placeholder="Brief project inquiry or mission details..." required></textarea>
+                    <button type="submit" class="btn-primary" style="width: 100%;">Send Signal</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Website Footer -->
+        <footer class="footer">
+            <div class="social-row">
+                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+            </div>
+
+            <!-- CREATOR BRANDING (Blue & White Styling) -->
+            <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 12px;">
+                <span style="color: #ffffff;">Designed by</span> 
+                <span style="color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);">Goldy Mehra fx</span>
+            </div>
+        </footer>
+
     </div>
 
-    <!-- Modals -->
-    <div id="watchModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('watchModal')">&times;</span>
-            <h2 style="color:var(--accent-emerald); margin-bottom:12px;">Sci-Fi Cinematic Premiere</h2>
-            <p style="margin-bottom:16px;">Watch the latest AI video render below:</p>
-            <div style="background:#000; height:220px; border-radius:8px; display:flex; align-items:center; justify-content:center; border:1px solid var(--accent-cyan);">
-                <i class="fa-solid fa-play" style="font-size:48px; color:var(--accent-emerald);"></i>
-            </div>
-        </div>
-    </div>
-
-    <div id="storyModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('storyModal')">&times;</span>
-            <h2 style="color:var(--accent-cyan); margin-bottom:12px;">Rain Between Us</h2>
-            <p style="line-height:1.6; color:#cbd5e1;">The neon lights reflected off the wet street pavement as the rain fell heavily around them. Standing under the high-tech awning, they shared a final silent look before departing into separate galaxies...</p>
-        </div>
-    </div>
-
-    <div id="galleryModal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="closeModal('galleryModal')">&times;</span>
-            <h2 style="color:var(--accent-emerald); margin-bottom:12px;">Deep Space Gallery</h2>
-            <p>Visual art renderings showcase:</p>
-            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:12px;">
-                <div style="background:rgba(0,255,170,0.1); padding:30px; text-align:center; border-radius:8px; border:1px solid var(--accent-emerald);">Mecha Core #01</div>
-                <div style="background:rgba(0,243,255,0.1); padding:30px; text-align:center; border-radius:8px; border:1px solid var(--accent-cyan);">Cyber City #02</div>
-            </div>
-        </div>
-    </div>
-
+    <!-- 3D Three.js Galaxy & Fleet Script -->
     <script>
-        function openModal(id) { document.getElementById(id).style.display = "flex"; }
-        function closeModal(id) { document.getElementById(id).style.display = "none"; }
-
-        /* 3D Background Engine */
         const canvas = document.getElementById('webgl-canvas');
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
@@ -396,24 +565,35 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        const galaxyParticleCount = 2000;
-        const galaxyGeo = new THREE.BufferGeometry();
-        const galaxyPositions = new Float32Array(galaxyParticleCount * 3);
+        // Galaxy Particles
+        const particleCount = 2500;
+        const particleGeo = new THREE.BufferGeometry();
+        const positions = new Float32Array(particleCount * 3);
 
-        for (let i = 0; i < galaxyParticleCount * 3; i++) {
-            galaxyPositions[i] = (Math.random() - 0.5) * 60;
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = (Math.random() - 0.5) * 80;
+            positions[i + 1] = (Math.random() - 0.5) * 80;
+            positions[i + 2] = (Math.random() - 0.5) * 80;
         }
 
-        galaxyGeo.setAttribute('position', new THREE.BufferAttribute(galaxyPositions, 3));
-        const galaxyMat = new THREE.PointsMaterial({ size: 0.12, color: 0x00ffaa, transparent: true, opacity: 0.8 });
-        const galaxy = new THREE.Points(galaxyGeo, galaxyMat);
+        particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+        const particleMat = new THREE.PointsMaterial({
+            size: 0.15,
+            color: 0x00ffaa,
+            transparent: true,
+            opacity: 0.7
+        });
+
+        const galaxy = new THREE.Points(particleGeo, particleMat);
         scene.add(galaxy);
 
-        camera.position.z = 18;
+        camera.position.z = 25;
 
+        // Animation Loop
         function animate() {
             requestAnimationFrame(animate);
-            galaxy.rotation.y += 0.002;
+            galaxy.rotation.y += 0.001;
+            galaxy.rotation.x += 0.0005;
             renderer.render(scene, camera);
         }
         animate();

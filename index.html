@@ -137,7 +137,7 @@
 
         /* Hero Section */
         .hero {
-            min-height: 80vh;
+            min-height: 75vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -305,7 +305,7 @@
             box-shadow: 0 0 8px var(--accent-cyan);
         }
 
-        /* Narrative Story & Interactive Lore Reader */
+        /* Narrative Story Card & Terminal */
         .story-card {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -369,7 +369,6 @@
             flex-wrap: wrap;
         }
 
-        /* Interactive Terminal Console Excerpts */
         .terminal-box {
             margin-top: 32px;
             background: rgba(2, 8, 14, 0.85);
@@ -378,7 +377,6 @@
             padding: 20px;
             font-family: monospace;
             color: #a7f3d0;
-            position: relative;
         }
 
         .terminal-header {
@@ -397,7 +395,7 @@
             color: #e2e8f0;
         }
 
-        /* 6 Video Showcase Grid */
+        /* Media Grid & Native HTML5 Video Player */
         .grid-3 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -421,21 +419,18 @@
             box-shadow: 0 8px 30px rgba(0, 255, 170, 0.25);
         }
 
-        .video-container {
+        .video-wrapper {
             position: relative;
             width: 100%;
-            padding-bottom: 56.25%;
-            height: 0;
+            height: 200px;
             background: #000;
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
+        .video-wrapper video {
             width: 100%;
             height: 100%;
-            border: none;
+            object-fit: cover;
+            outline: none;
         }
 
         .media-info {
@@ -458,7 +453,7 @@
             line-height: 1.5;
         }
 
-        /* Quote / Universe Lore Banner */
+        /* Universe Lore Quote Banner */
         .lore-quote-banner {
             background: linear-gradient(135deg, rgba(0, 255, 170, 0.08), rgba(138, 43, 226, 0.12));
             border: 1px solid var(--glass-border);
@@ -485,7 +480,7 @@
             font-weight: 700;
         }
 
-        /* Contact Section */
+        /* Contact Form */
         .contact-container {
             max-width: 600px;
             margin: 0 auto;
@@ -556,12 +551,12 @@
 </head>
 <body>
 
-    <!-- 3D Background Canvas -->
+    <!-- 3D Canvas Background -->
     <canvas id="webgl-canvas"></canvas>
 
     <div class="site-content">
         
-        <!-- Sticky Navigation -->
+        <!-- Navigation Header -->
         <header class="navbar">
             <a href="#" class="nav-brand">
                 <i class="fa-solid fa-robot"></i> ASSISTIFY
@@ -678,95 +673,115 @@
             </div>
         </section>
 
-        <!-- 6 Video Showcase Grid -->
+        <!-- 6 Native HTML5 Video Showcase Grid -->
         <section id="videos" class="section">
             <div class="section-header">
                 <h2 class="section-title">Sci-Fi Video Showcase (6 Episodes)</h2>
             </div>
             <div class="grid-3">
-                <!-- Video 1 -->
+
+                <!-- Video 1: Midnight Run -->
                 <div class="media-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/L3oOldViIgY" title="Chapter 1: Midnight Run" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <video controls playsinline poster="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
                     </div>
                     <div class="media-info">
                         <div>
                             <h4>Chapter 1: Midnight Run</h4>
                             <p>High-speed street racing visual rendering beneath cybernetic streetlights.</p>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=L3oOldViIgY" target="_blank" class="btn-secondary"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                        <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4" target="_blank" class="btn-secondary"><i class="fa-solid fa-up-right-from-square"></i> Open Stream</a>
                     </div>
                 </div>
 
-                <!-- Video 2 (Updated working embed) -->
+                <!-- Video 2: Neon Reflection (VERIFIED WORKING NATIVE VIDEO) -->
                 <div class="media-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/qL11uX0i6Y0" title="Chapter 2: Neon Reflection" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <video controls playsinline poster="https://images.unsplash.com/photo-1515260268569-9271009adfdb?w=600">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
                     </div>
                     <div class="media-info">
                         <div>
                             <h4>Chapter 2: Neon Reflection</h4>
                             <p>Dramatic emotional dialogue sequence scripted under atmospheric neon rainfall.</p>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=qL11uX0i6Y0" target="_blank" class="btn-secondary"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                        <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" target="_blank" class="btn-secondary"><i class="fa-solid fa-up-right-from-square"></i> Open Stream</a>
                     </div>
                 </div>
 
-                <!-- Video 3 -->
+                <!-- Video 3: Cosmos Departure -->
                 <div class="media-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/O133ppiVnWY" title="Chapter 3: Cosmos Departure" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <video controls playsinline poster="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
                     </div>
                     <div class="media-info">
                         <div>
                             <h4>Chapter 3: Cosmos Departure</h4>
                             <p>Interstellar departure featuring cinematic mech suits and orbital flight paths.</p>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=O133ppiVnWY" target="_blank" class="btn-secondary"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                        <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" target="_blank" class="btn-secondary"><i class="fa-solid fa-up-right-from-square"></i> Open Stream</a>
                     </div>
                 </div>
 
-                <!-- Video 4 -->
+                <!-- Video 4: Cybernetic Dawn -->
                 <div class="media-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/sNbdxN8C1aU" title="Chapter 4: Cybernetic Dawn" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <video controls playsinline poster="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
                     </div>
                     <div class="media-info">
                         <div>
                             <h4>Chapter 4: Cybernetic Dawn</h4>
                             <p>Early dawn visual renders over emerald energy grids and futuristic spires.</p>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=sNbdxN8C1aU" target="_blank" class="btn-secondary"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                        <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4" target="_blank" class="btn-secondary"><i class="fa-solid fa-up-right-from-square"></i> Open Stream</a>
                     </div>
                 </div>
 
-                <!-- Video 5 -->
+                <!-- Video 5: Orbital Resonance -->
                 <div class="media-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/fJ_Xf7C1L1s" title="Chapter 5: Orbital Resonance" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <video controls playsinline poster="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
                     </div>
                     <div class="media-info">
                         <div>
                             <h4>Chapter 5: Orbital Resonance</h4>
                             <p>Sub-space ship flight mechanics navigating atmospheric entry barriers.</p>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=fJ_Xf7C1L1s" target="_blank" class="btn-secondary"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                        <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" target="_blank" class="btn-secondary"><i class="fa-solid fa-up-right-from-square"></i> Open Stream</a>
                     </div>
                 </div>
 
-                <!-- Video 6 -->
+                <!-- Video 6: Hyperdrive Finale -->
                 <div class="media-card">
-                    <div class="video-container">
-                        <iframe src="https://www.youtube.com/embed/q0sX0L787-w" title="Chapter 6: Hyperdrive Finale" allowfullscreen></iframe>
+                    <div class="video-wrapper">
+                        <video controls playsinline poster="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600">
+                            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                            Your browser does not support HTML5 video.
+                        </video>
                     </div>
                     <div class="media-info">
                         <div>
                             <h4>Chapter 6: Hyperdrive Finale</h4>
                             <p>The explosive climax bridging the gap between dimensions in the final horizon.</p>
                         </div>
-                        <a href="https://www.youtube.com/watch?v=q0sX0L787-w" target="_blank" class="btn-secondary"><i class="fab fa-youtube"></i> Watch on YouTube</a>
+                        <a href="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" target="_blank" class="btn-secondary"><i class="fa-solid fa-up-right-from-square"></i> Open Stream</a>
                     </div>
                 </div>
+
             </div>
         </section>
 
@@ -778,7 +793,7 @@
             <div class="lore-quote-author">— Excerpt from 'Rain Between Us' Narrative Lore</div>
         </div>
 
-        <!-- 6 Wallpapers / Visual Archives Section -->
+        <!-- 6 Wallpapers Section -->
         <section id="gallery" class="section">
             <div class="section-header">
                 <h2 class="section-title">Visual Archives (6 Wallpapers)</h2>
@@ -858,7 +873,7 @@
             </div>
         </section>
 
-        <!-- Contact Transmission Section -->
+        <!-- Contact Section -->
         <section id="contact" class="section">
             <div class="section-header">
                 <h2 class="section-title">Cosmic Transmission</h2>
@@ -882,7 +897,6 @@
                 <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
             </div>
 
-            <!-- CREATOR BRANDING (White & Blue Styling) -->
             <div style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 12px;">
                 <span style="color: #ffffff;">Designed by</span> 
                 <span style="color: #00f3ff; text-shadow: 0 0 10px rgba(0, 243, 255, 0.7);">Goldy Mehra fx</span>
@@ -891,7 +905,7 @@
 
     </div>
 
-    <!-- Enhanced 3D Three.js Engine with Particles & Floating Cyber Objects -->
+    <!-- 3D Three.js Animation Script -->
     <script>
         const canvas = document.getElementById('webgl-canvas');
         const scene = new THREE.Scene();
@@ -901,7 +915,7 @@
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-        // 1. Particle System
+        // Particle System
         const particleCount = 2800;
         const particleGeo = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
@@ -923,17 +937,15 @@
         const galaxy = new THREE.Points(particleGeo, particleMat);
         scene.add(galaxy);
 
-        // 2. Moving Geometric Floating Objects in Background
+        // Moving Wireframe 3D Geometries
         const geoMeshGroup = new THREE.Group();
 
-        // Wireframe Octahedron
         const octaGeo = new THREE.OctahedronGeometry(3, 0);
         const wireMat1 = new THREE.MeshBasicMaterial({ color: 0x00f3ff, wireframe: true, transparent: true, opacity: 0.25 });
         const octaMesh = new THREE.Mesh(octaGeo, wireMat1);
         octaMesh.position.set(-12, 6, -10);
         geoMeshGroup.add(octaMesh);
 
-        // Wireframe Torus Knot
         const torusGeo = new THREE.TorusKnotGeometry(2.5, 0.5, 64, 8);
         const wireMat2 = new THREE.MeshBasicMaterial({ color: 0x00ffaa, wireframe: true, transparent: true, opacity: 0.2 });
         const torusMesh = new THREE.Mesh(torusGeo, wireMat2);
@@ -944,15 +956,11 @@
 
         camera.position.z = 24;
 
-        // Animation Loop
         function animate() {
             requestAnimationFrame(animate);
-            
-            // Rotate Galaxy
             galaxy.rotation.y += 0.001;
             galaxy.rotation.x += 0.0004;
 
-            // Rotate Floating Wireframe Objects
             octaMesh.rotation.x += 0.008;
             octaMesh.rotation.y += 0.008;
 
